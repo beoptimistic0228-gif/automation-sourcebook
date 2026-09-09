@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자동화 소재 — 세인투 실행조 시즌2 자동화 트랙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Jua&family=Gothic+A1:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF6E5; --cream-2:#FFEFD2; --ink:#1C1A16; --ink-70:#57524A;
+  --coral:#FF6B4A; --lemon:#FFCE2E; --mint:#2FC9A4; --sky:#4FA8FF; --lav:#9B8CFF; --tang:#FF9B3D; --leaf:#7BD44A;
+  --disp:"Jua",sans-serif; --sans:"Gothic A1",sans-serif; --en:"Fredoka",sans-serif;
+  --pad:clamp(18px,4.5vw,72px);
+  --shadow:5px 5px 0 var(--ink); --shadow-lg:9px 9px 0 var(--ink);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--sans);font-size:17px;line-height:1.75;color:var(--ink);
+  background:var(--cream);
+  background-image:radial-gradient(var(--cream-2) 2.4px, transparent 2.4px);
+  background-size:22px 22px;-webkit-font-smoothing:antialiased;
+}
+header{background:var(--ink);color:var(--cream);padding:16px var(--pad);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-family:var(--disp);font-size:23px;display:flex;align-items:center;gap:9px}
+.logo .dot{width:15px;height:15px;border-radius:50%;background:var(--lemon);box-shadow:0 0 0 3px var(--ink),0 0 0 6px var(--coral)}
+header .who{margin-left:auto;font-size:14px;opacity:.72}
+
+.hero{padding:clamp(44px,7vw,86px) var(--pad) clamp(26px,4vw,44px);position:relative;overflow:hidden}
+.badge{display:inline-block;background:var(--lemon);border:3px solid var(--ink);border-radius:999px;
+  padding:7px 20px;font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.12em;
+  box-shadow:4px 4px 0 var(--ink);transform:rotate(-2.5deg);text-transform:uppercase}
+.hero h1{font-family:var(--disp);font-weight:400;font-size:clamp(36px,7.2vw,84px);line-height:1.2;
+  margin:24px 0 20px;letter-spacing:-.01em;max-width:16ch}
+.hero h1 .hi{display:inline-block;background:var(--coral);color:var(--cream);padding:0 .16em;border-radius:12px;
+  transform:rotate(-1.5deg);box-shadow:4px 4px 0 var(--ink);border:3px solid var(--ink)}
+.hero p{font-size:clamp(17px,1.7vw,20px);max-width:44ch;color:var(--ink-70);font-weight:500}
+.legend{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}
+.blob{position:absolute;border-radius:50%;border:3px solid var(--ink);z-index:-1}
+.blob.a{width:150px;height:150px;background:var(--mint);right:6%;top:12%;opacity:.85}
+.blob.b{width:78px;height:78px;background:var(--lav);right:20%;top:56%}
+@media(max-width:820px){.blob{display:none}}
+
+.tabwrap{padding:10px var(--pad) 4px;position:sticky;top:0;z-index:30;background:var(--cream);
+  background-image:radial-gradient(var(--cream-2) 2.4px,transparent 2.4px);background-size:22px 22px;
+  border-bottom:3px solid var(--ink)}
+.tabs{display:flex;gap:12px;overflow-x:auto;padding:12px 2px 16px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;cursor:pointer;font-family:var(--sans);font-weight:700;font-size:16px;color:var(--ink);
+  background:#fff;border:3px solid var(--ink);border-radius:16px;padding:11px 18px 11px 13px;
+  display:flex;align-items:center;gap:9px;white-space:nowrap;box-shadow:var(--shadow);
+  transition:transform .12s ease,box-shadow .12s ease,background .12s}
+.tab:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.tab:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--ink)}
+.tab[aria-selected="true"]{background:var(--c);transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.tab .ico{width:32px;height:32px;border-radius:10px;border:2.5px solid var(--ink);background:var(--c);
+  display:grid;place-items:center;font-size:17px;line-height:1;flex:0 0 auto}
+.tab[aria-selected="true"] .ico{background:#fff}
+.tab .n{font-family:var(--en);font-size:12px;background:var(--ink);color:var(--cream);border-radius:999px;padding:2px 8px}
+
+main{padding:clamp(30px,4.5vw,56px) var(--pad) 100px}
+.listhead{display:flex;align-items:center;gap:14px;margin-bottom:30px;flex-wrap:wrap}
+.listhead h2{font-family:var(--disp);font-weight:400;font-size:clamp(24px,3.4vw,38px)}
+.listhead .pill{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 15px;font-family:var(--en);font-size:12.5px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:26px}
+.card{background:#fff;border:3px solid var(--ink);border-radius:22px;overflow:hidden;cursor:pointer;
+  text-align:left;font:inherit;color:inherit;padding:0;display:flex;flex-direction:column;
+  box-shadow:var(--shadow);transition:transform .16s ease,box-shadow .16s ease;
+  animation:pop .42s cubic-bezier(.34,1.4,.5,1) backwards}
+.card:hover{transform:translate(-3px,-3px) rotate(-.5deg);box-shadow:var(--shadow-lg)}
+.card:focus-visible{outline:4px solid var(--coral);outline-offset:3px}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+
+.thumb{position:relative;aspect-ratio:16/10;border-bottom:3px solid var(--ink);background:var(--c);
+  background-image:repeating-linear-gradient(45deg,rgba(0,0,0,.07) 0 12px,transparent 12px 24px);
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thumb .glyph{font-size:64px;line-height:1;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.18))}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.kind{position:absolute;top:10px;left:10px;z-index:2;background:#fff;border:2.5px solid var(--ink);
+  border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:700;box-shadow:2.5px 2.5px 0 var(--ink);
+  white-space:nowrap;max-width:calc(60% - 14px);overflow:hidden;text-overflow:ellipsis}
+.kind.own{background:var(--coral);color:#fff}
+.kind.real{background:var(--mint)}
+.src{position:absolute;bottom:0;left:0;right:0;z-index:2;background:rgba(28,26,22,.86);color:var(--cream);
+  font-size:12.5px;padding:6px 12px;display:flex;gap:7px;align-items:center}
+.src b{font-weight:700}
+.tool{position:absolute;right:12px;top:12px;z-index:2;width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;pointer-events:none}
+/* 배경판 없이 로고만 — 사진·패턴 위에서도 읽히게 흰 글로우 + 그림자만 얹는다 */
+.tool img{width:100%;height:100%;object-fit:contain;display:block;
+  filter:drop-shadow(0 0 3px rgba(255,255,255,.95)) drop-shadow(0 0 6px rgba(255,255,255,.7))
+         drop-shadow(2px 2px 0 rgba(28,26,22,.28))}
+
+.cbody{padding:20px 22px 22px;display:flex;flex-direction:column;gap:11px;flex:1}
+.cbody h3{font-family:var(--disp);font-weight:400;font-size:23px;line-height:1.4}
+.cbody .sum{color:var(--ink-70);font-size:16.5px;flex:1;font-weight:500}
+.chips{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.chip{font-size:13px;font-weight:700;padding:4px 12px;border:2.5px solid var(--ink);border-radius:999px;background:var(--lemon)}
+.chip.w{background:#fff}
+.chip.tool-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 12px 3px 5px}
+.chip.tool-chip img{width:22px;height:22px;object-fit:contain;display:block}
+.go{font-family:var(--en);font-size:13px;display:flex;align-items:center;gap:8px;transition:gap .16s}
+.card:hover .go{gap:14px}
+
+dialog{border:4px solid var(--ink);border-radius:26px;padding:0;background:var(--cream);color:var(--ink);
+  width:min(94vw,780px);box-shadow:12px 12px 0 var(--ink);overflow:hidden;
+  margin:auto;max-height:90vh;display:block}
+dialog:not([open]){display:none}
+dialog::backdrop{background:rgba(28,26,22,.55)}
+dialog[open]{animation:dpop .34s cubic-bezier(.34,1.35,.5,1)}
+@keyframes dpop{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+.d-hero{position:relative;aspect-ratio:21/8;border-bottom:4px solid var(--ink);background:var(--c);
+  background-image:repeating-linear-gradient(45deg,rgba(0,0,0,.07) 0 14px,transparent 14px 28px);
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.d-hero .glyph{font-size:76px;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.18))}
+.d-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.d-close{position:absolute;top:14px;right:14px;z-index:3;width:44px;height:44px;border:3px solid var(--ink);
+  background:#fff;border-radius:50%;cursor:pointer;font-size:21px;line-height:1;box-shadow:3px 3px 0 var(--ink)}
+.d-close:hover{background:var(--coral);color:#fff}
+.d-top{padding:22px clamp(20px,4vw,44px) 18px}
+.d-top h2{font-family:var(--disp);font-weight:400;font-size:clamp(25px,3.6vw,36px);line-height:1.32;margin:10px 0 0}
+.d-body{padding:8px clamp(20px,4vw,44px) 40px;display:flex;flex-direction:column;gap:26px;max-height:54vh;overflow:auto}
+.sec h4{font-family:var(--en);font-size:12.5px;background:var(--lemon);border:2.5px solid var(--ink);
+  border-radius:999px;padding:3px 13px;display:inline-block;margin-bottom:12px;box-shadow:2.5px 2.5px 0 var(--ink)}
+.sec p{font-size:17px;font-weight:500}
+.sec ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.sec li{padding-left:26px;position:relative;font-size:17px;font-weight:500}
+.sec li::before{content:"✦";position:absolute;left:0;top:0;color:var(--coral);font-size:15px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.flow div{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:14px 12px;box-shadow:3px 3px 0 var(--ink)}
+.flow b{display:block;font-family:var(--en);font-size:10.5px;margin-bottom:7px;color:var(--ink-70)}
+.flow span{font-size:15.5px;line-height:1.5;font-weight:500}
+.sec .lead{font-size:18.5px;font-weight:700;line-height:1.6}
+.sec .hint{font-size:15px;color:var(--ink-70);font-weight:500;margin-bottom:10px}
+.links a .tn.plain{display:flex;align-items:center;justify-content:center;background:none;border:0}
+.links a .tn.plain img{width:40px;height:40px;object-fit:contain;display:block}
+.note.first{background:var(--lemon)}
+.note{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:14px 16px;box-shadow:3px 3px 0 var(--ink);font-weight:500}
+.links{display:flex;flex-direction:column;gap:10px}
+.links a{display:flex;align-items:center;gap:12px;background:#fff;border:3px solid var(--ink);border-radius:16px;
+  padding:10px 14px;text-decoration:none;color:var(--ink);font-weight:700;font-size:16px;
+  box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.links a:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);background:var(--lemon)}
+.links a .tn{width:76px;height:48px;flex:0 0 auto;border:2.5px solid var(--ink);border-radius:9px;object-fit:cover;background:var(--cream-2)}
+.links a .tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+.links a .tx span{font-size:12.5px;font-weight:500;color:var(--ink-70);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.links a .role{font-family:var(--en);font-size:10.5px;background:var(--ink);color:var(--cream);border-radius:999px;padding:2px 9px;margin-left:auto;flex:0 0 auto}
+@media(max-width:640px){.flow{grid-template-columns:1fr 1fr}.links a .role{display:none}}
+
+footer{border-top:3px solid var(--ink);background:var(--ink);color:var(--cream);padding:28px var(--pad) 52px;
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:14.5px}
+footer .stamp{font-family:var(--en);font-size:11.5px;opacity:.6}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="dot"></span>자동화 소재</div>
+  <div class="who">세인투 실행조 시즌2 · 자동화 트랙</div>
+</header>
+
+<section class="hero">
+  <span class="blob a"></span><span class="blob b"></span>
+  <span class="badge">Automation Sourcebook</span>
+  <h1>당신 일에서 <span class="hi">반복되는 것</span>부터.</h1>
+  <p>직업별로 모아 둔 자동화 사례집입니다. 무엇을 만들지는 직접 정하시고, 여기서는 감각만 얻어 가시면 됩니다.</p>
+  <div class="legend">
+    <span class="chip w">⭐ 낙관 사례 — 제가 실제로 돌리는 것</span>
+    <span class="chip w">📺 실사례 — 남이 만든 것, 출처 있음</span>
+    <span class="chip w">💡 응용 아이디어 — 아직 사례는 못 찾음</span>
+  </div>
+</section>
+
+<div class="tabwrap"><div class="tabs" role="tablist" id="tabs"></div></div>
+
+<main>
+  <div class="listhead"><h2 id="listTitle"></h2><span class="pill" id="listCount"></span></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <div>트랙코치 낙관 · 사례는 계속 추가됩니다</div>
+  <div class="stamp">MOCKUP V3 — 2026.09.09</div>
+</footer>
+
+<dialog id="dlg">
+  <div class="d-hero" id="dHero">
+    <span class="glyph" id="dGlyph"></span>
+    <img id="dImg" alt="" hidden>
+    <button class="d-close" id="dlgClose" aria-label="닫기">&times;</button>
+  </div>
+  <div class="d-top"><div class="chips" id="dMeta"></div><h2 id="dTitle"></h2></div>
+  <div class="d-body" id="dBody"></div>
+</dialog>
+
+<script>
+var F = ["① 무엇이 시작하나","② 모은다","③ 고른다·바꾼다","④ 내보낸다"];
+var KIND = {own:["⭐ 낙관 사례","own"], real:["📺 실사례","real"], idea:["💡 응용 아이디어",""]};
+
+/* 도구 마크 — 임시. 배포 전 공식 에셋·브랜드 가이드 확인 필요 */
+var TOOL = {
+  "클로드코드":'<img src="assets/claudecode.png" alt="">',
+  "코덱스":'<img src="assets/codex.png" alt="">'
+};
+var DOC = {"클로드코드":"https://docs.anthropic.com/en/docs/claude-code","코덱스":"https://openai.com/codex/"};
+
+/* 실제 확인된 자료 — og:image·썸네일 응답 확인 2026-09-09 */
+var R = {
+  reClaude:{t:"부동산 업무 자동화 시스템 구축해보기 — 중복·허위매물 정리", p:"지피터스", role:"출처",
+    u:"https://www.gpters.org/nocode/post/establish-real-estate-business-hG3A3oGzj2Cx2W9",
+    th:"https://tribe-s3-production.imgix.net/oBUQFSPLBFFIj23vwjs3d?fit=max&w=1000&auto=compress,format"},
+  reN8n:{t:"N8N으로 부동산 중개 매물 소개 블로그 자동화 하기", p:"지피터스", role:"출처 · n8n 사례",
+    u:"https://www.gpters.org/nocode/post/n8neuro-budongsan-junggae-maemul-sogae-beulrogeu-jadonghwa-hagi-4M0T4N2rRA8sT1j",
+    th:"https://tribe-s3-production.imgix.net/x5mcC8ImVNTkRUc1HlmgT?fit=max&w=1000&auto=compress,format"},
+  hoc:{t:"비개발자 마케터의 클로드 코드 활용법 — 광고·콘텐츠 자동화 실전 사례", p:"High Output Club", role:"출처",
+    u:"https://blog.highoutputclub.com/claude-code-marketing-automation/",
+    th:"https://storage.ghost.io/c/b6/51/b651c236-8ffa-4b60-89e0-a48718ab78eb/content/images/2026/02/------------------------------------------------------------------------------------------------_----------------------------------------------------------------------------------------------.png"},
+  yt80:{t:"클로드 코드로 회사 업무 80% 자동화 했습니다", p:"YouTube", role:"관련 영상",
+    u:"https://www.youtube.com/watch?v=Gx6DmUrmg6g",
+    th:"https://img.youtube.com/vi/Gx6DmUrmg6g/hqdefault.jpg"},
+  brunch:{t:"따라하기만 하면 되는 클로드코드 업무 자동화 (완결판)", p:"brunch", role:"관련 글",
+    u:"https://brunch.co.kr/@sukistory/84",
+    th:"https://img1.kakaocdn.net/thumb/R1280x0.fpng/?fname=http://t1.kakaocdn.net/brunch/service/user/8I37/image/dop087EFyTjIB1DSnAsLe8B7iPI.png"},
+  noshow:{t:"노쇼율 낮춘 병원들의 공통점 — 다단계 리마인드 구조", p:"세이프닥", role:"관련 글",
+    u:"https://safedoc.io/blog/no-show-rate-lowering-hospital-strategies",
+    th:"https://image.inblog.dev/?url=https%3A%2F%2Fsource.inblog.dev%2Ffeatured_image%2F2026-06-29T06%3A41%3A31.037Z-5fbed66c-9a88-40ac-9868-d2be04d53856&w=1200&q=85&format=jpg&v=2026-06-29T06%3A41%3A32.073Z"},
+  medi:{t:"병·의원 울리는 노쇼(No-show)의 덫", p:"데일리메디", role:"근거 기사",
+    u:"https://www.dailymedi.com/detail.php?number=814267",
+    th:"https://www.dailymedi.com/img/d_logo.jpg"},
+  jandi:{t:"학원 퇴원 시그널, AI 학생 관리 자동화 (웨비나 인사이트)", p:"잔디 블로그", role:"관련 글",
+    u:"https://blog.jandi.com/ko/2025/08/13/edu-webinar-insight-01/",
+    th:"https://blog.jandi.com/ko/wp-content/uploads/sites/4/2025/08/edu-webinar-new.png"},
+  ytsum:{t:"유튜브 요약 자동화 5단계 — 새 영상을 AI가 노션에 자동 정리", p:"HowtoAI", role:"관련 글",
+    u:"https://www.how-toai.com/blog/youtube-summary-automation-notion-5-steps-2026",
+    th:"https://www.how-toai.com/images/posts/youtube-summary-automation-notion-5-steps-2026-thumb.webp"}
+};
+
+var DATA = [
+ {t:"부동산·중개", ico:"🏠", c:"var(--coral)", items:[
+  {k:"real", g:"🔍", h:"중복·허위 매물 걸러내기", s:"여러 곳에서 들어온 매물에서 같은 물건과 수상한 가격을 자동으로 찾아냅니다.", tool:"클로드코드",
+   pain:"매물이 여러 경로로 들어오면 같은 물건이 서로 다른 정보로 중복됩니다. 눈으로 대조하다 놓치고, 없는 물건을 손님에게 안내하게 됩니다.",
+   flow:["새 매물이 들어오면","등록된 매물을 전부 읽어 옴","주소·면적·가격·이미지로 중복과 허위를 판별","신뢰도를 색으로 표시"],
+   need:["매물 목록 (주소·면적·층수·가격)","허위 판정에 쓸 시세 기준"],
+   hard:"판별 기준을 숫자로 정해야 합니다. 출처 사례는 2단계 기준을 주소 유사도 90% 이상·가격 ±5%·면적 ±9㎡로 뒀고, 시세보다 15% 이상 싼 건을 의심 대상으로 봤습니다.",
+   first:"지금 목록에서 같은 물건으로 의심되는 두 건을 찾아, 무엇이 같고 무엇이 다른지 적어 보십시오. 그게 기준의 초안입니다.", refs:[R.reClaude]},
+  {k:"real", g:"✍️", h:"매물 소개 글 자동 작성", s:"새로 들어온 매물을 매일 정한 시각에 감지해 소개 글 초안까지 만듭니다.", tool:"클로드코드",
+   pain:"매물이 들어올 때마다 소개 글을 처음부터 씁니다. 쓰는 일에 지쳐 미루면 매물이 그대로 묻힙니다.",
+   flow:["매일 정한 시각","시트에서 「대기」 상태 매물을 감지","항목을 정리해 소개 문장으로 변환","글 초안 생성"],
+   need:["매물을 적는 시트","작업 상태 칸 (대기 / 완료)"],
+   hard:"한 칸에 여러 정보를 넣으면 결과가 흐려집니다. 출처 사례는 「정보 하나에 열 하나」를 원칙으로 뒀고, 매물 위치가 그대로 노출되지 않도록 지도 중심을 흐리는 처리를 따로 했습니다.",
+   first:"매물 시트의 열 이름을 정리하고 「작업 상태」 칸을 하나 추가해 보십시오.", refs:[R.reN8n]},
+  {k:"idea", g:"📅", h:"계약 만기 미리 알림", s:"만기 30일 전과 7일 전에 대상자 목록과 연락 문구 초안을 만들어 둡니다.", tool:"코덱스",
+   pain:"만기는 대부분 기억으로 관리됩니다. 한 건 놓치면 그대로 매출입니다.",
+   flow:["매일 아침","계약 목록을 읽음","날짜를 계산해 대상만 추림","목록과 문구 초안을 전달"],
+   need:["계약일과 만기일이 들어 있는 목록"],
+   hard:"날짜 형식이 섞여 있으면 처음 한 번 정리가 필요합니다.",
+   first:"계약 목록에 만기일 칸이 있는지부터 확인해 보십시오.", refs:[]}]},
+
+ {t:"보험·금융·영업", ico:"🤝", c:"var(--lemon)", items:[
+  {k:"idea", g:"🎁", h:"고객 기념일 알림과 인사 초안", s:"생일과 계약 기념일을 미리 알려 주고, 사람마다 다른 인사 문구를 초안으로 뽑습니다.", tool:"클로드코드",
+   pain:"인사는 마음이 아니라 타이밍입니다. 지나고 나서 알면 차라리 안 보내는 편이 낫습니다.",
+   flow:["매일 아침","고객 목록을 읽음","오늘과 이번 주 대상을 추림","이름별 문구 초안"],
+   need:["이름과 날짜가 들어 있는 고객 목록"],
+   hard:"문구가 기계처럼 나오면 결국 안 쓰게 됩니다. 톤을 몇 번 다듬어야 합니다. 그리고 고객 정보를 외부로 내보내지 않는 구조로 짜야 합니다 — 이 업권은 특히 그렇습니다.",
+   first:"평소 보내는 인사 문구 세 개를 그대로 적어 두십시오. 그게 톤의 기준이 됩니다.", refs:[]},
+  {k:"idea", g:"📈", h:"주간 실적 보고 초안", s:"흩어진 숫자를 모아 보고서 초안까지 만들어 둡니다. 확인만 하고 보냅니다.", tool:"코덱스",
+   pain:"숫자를 옮겨 적는 데 시간을 쓰고, 정작 해석에는 시간이 남지 않습니다.",
+   flow:["금요일 오후","실적 자료를 모음","증감과 특이점을 계산","보고서 초안"],
+   need:["매주 쓰는 보고 양식 한 개"],
+   hard:"양식이 매번 바뀌면 효과가 줄어듭니다.",
+   first:"지난주 보고서 하나를 그대로 남겨 두십시오. 양식은 그걸로 씁니다.", refs:[R.brunch]}]},
+
+ {t:"학원·교육·강의", ico:"📚", c:"var(--mint)", items:[
+  {k:"idea", g:"📝", h:"출결과 상담 기록 정리", s:"수업 후 남긴 메모를 학생별로 모아 상담 때 바로 쓰는 형태로 정리합니다.", tool:"클로드코드",
+   pain:"메모는 쌓이는데 정작 상담 전날 밤에 처음부터 다시 읽습니다. 이탈 징후는 그 사이에 지나갑니다.",
+   flow:["수업이 끝난 뒤","그날 메모를 모음","학생별로 묶음","학생 카드를 갱신"],
+   need:["수업 메모를 적는 곳 하나"],
+   hard:"메모가 손글씨면 옮기는 단계가 하나 더 붙습니다.",
+   first:"이번 주 메모를 한 파일에 모아 보십시오.", refs:[R.jandi]},
+  {k:"idea", g:"✉️", h:"학부모 안내문 초안", s:"공지할 내용 몇 줄을 넣으면 학부모용 안내문 문장으로 바꿔 줍니다.", tool:"코덱스",
+   pain:"내용 정하는 데 5분, 문장 다듬는 데 40분이 걸립니다.",
+   flow:["안내할 일이 생겼을 때","요점 몇 줄을 입력","안내문 톤으로 변환","보낼 형태로 출력"],
+   need:["지난 안내문 두세 장"],
+   hard:"학원마다 톤이 다릅니다. 예시가 곧 품질입니다.",
+   first:"작년에 보낸 안내문을 찾아 두십시오.", refs:[]}]},
+
+ {t:"병원·의료", ico:"🩺", c:"var(--sky)", items:[
+  {k:"idea", g:"🗓️", h:"예약 리마인드 3번 보내기", s:"접수 즉시·확정 시·당일 오전, 세 시점의 명단과 안내 문구를 자동으로 만듭니다.", tool:"클로드코드",
+   pain:"예약부도는 하루 평균 10% 안팎으로 보고됩니다. 서울대병원이 부도 환자 600명에게 이유를 물었을 때 78%가 예약에 책임감을 느끼지 않았다고 답했습니다 — 대부분 잊어서 안 온다는 뜻이라, 리마인드가 실제로 듣는 지점입니다.",
+   flow:["예약이 접수되면","예약 자료를 읽음","세 시점(접수·확정·당일 오전)을 계산","시점별 명단과 문구"],
+   need:["예약 목록","보낼 통로 (문자·알림톡 등)"],
+   hard:"환자 정보는 밖으로 내보내지 않는 구조로 짜야 합니다. 이 조건이 설계의 출발점입니다. 그리고 한 번만 보내면 효과가 얕습니다 — 세 시점을 나누는 것이 핵심입니다.",
+   first:"예약을 어디에 적고 있는지부터 확인해 보십시오.", refs:[R.noshow, R.medi]}]},
+
+ {t:"자영업·소매·서비스", ico:"🛒", c:"var(--lav)", items:[
+  {k:"real", g:"📣", h:"광고 성과 정리와 소재 만들기", s:"광고 데이터를 모아 성과를 정리하고, 다음 소재 초안까지 뽑는 흐름입니다.", tool:"클로드코드",
+   pain:"광고는 돌려 놓고 성과 확인은 미룹니다. 소재를 바꿔야 할 시점을 지나서 압니다.",
+   flow:["정한 주기마다","광고 데이터를 모음","성과가 꺾인 소재를 찾음","리포트와 새 소재 초안"],
+   need:["광고 계정 데이터를 내릴 수 있는 권한"],
+   hard:"플랫폼마다 지표 이름이 다릅니다. 처음 한 번 용어를 맞추는 작업이 필요합니다. 출처 사례는 데이터를 CSV로 내려 분석하는 방식과 역할별로 에이전트를 나누는 구성을 함께 다룹니다.",
+   first:"지금 돌리는 광고의 지표를 어디에서 보는지 그 화면부터 찾아 두십시오.", refs:[R.hoc]},
+  {k:"idea", g:"🧾", h:"매일 매출 정산 표", s:"영수증과 주문 내역을 모아 하루 정산 표를 자동으로 만듭니다.", tool:"코덱스",
+   pain:"문을 닫고 계산기를 두드립니다. 매일 30분이 그렇게 사라집니다.",
+   flow:["영업 종료 시","그날 자료를 모음","항목별 합계와 오차를 확인","일일 정산 표"],
+   need:["매출 자료가 남는 곳 (엑셀이든 앱 내역이든)"],
+   hard:"현금 거래가 섞이면 손으로 넣는 칸을 남겨 두어야 합니다.",
+   first:"어제 매출을 어디에서 확인했는지 그 경로를 적어 두십시오.", refs:[]},
+  {k:"idea", g:"📦", h:"거래처 발주 메일", s:"재고가 기준 아래로 떨어지면 발주 메일 초안을 만들어 둡니다.", tool:"클로드코드",
+   pain:"떨어진 것을 눈으로 보고 알아차립니다. 늦으면 손님을 그냥 돌려보냅니다.",
+   flow:["매주 정한 요일","재고 자료를 확인","기준에 못 미치는 품목을 추림","거래처별 메일 초안"],
+   need:["품목과 재고 기준 목록"],
+   hard:"기준 수량을 정하는 일이 사실 제일 어렵습니다. 자동화보다 이쪽이 오래 걸립니다.",
+   first:"자주 떨어지는 품목 다섯 개만 적어 보십시오.", refs:[]}]},
+
+ {t:"직장인 공통", ico:"💼", c:"var(--tang)", items:[
+  {k:"own", g:"🌅", h:"아침 8시 브리핑", s:"메일과 뉴스, 일정을 하나로 묶어 출근 전에 요약을 받습니다. 제가 매일 받고 있는 것입니다.", tool:"클로드코드",
+   pain:"아침 30분을 확인하는 데 씁니다. 정작 중요한 건 오후에 발견합니다.",
+   flow:["아침 8시","메일·뉴스·일정을 모음","중요한 것만 고름","요약 한 장을 보냄"],
+   need:["업무 메일 계정","평소 보는 뉴스 몇 곳"],
+   hard:"「중요한 것」의 기준을 내 언어로 적는 단계가 핵심입니다. 여기를 건너뛰면 요약이 쓸모없어집니다.",
+   first:"오늘 아침에 확인한 것을 순서대로 적어 보십시오. 그게 곧 설계도입니다.", refs:[R.yt80]},
+  {k:"own", g:"🎙️", h:"회의록 정리", s:"녹취 결과를 결정·할 일·보류로 나눠 정리합니다. W1에서 보여 드린 그 사례입니다.", tool:"코덱스",
+   pain:"회의는 끝났는데 정리가 남습니다. 미루면 기억이 먼저 사라집니다.",
+   flow:["회의가 끝난 뒤","녹취 글을 읽음","결정·할 일·보류로 분류","회의록과 할 일 목록"],
+   need:["녹취 도구 하나"],
+   hard:"사람 이름과 말투가 섞여 나옵니다. 정리 기준을 먼저 정해 두어야 합니다.",
+   first:"최근 회의록 하나를 열어 결정과 할 일에 표시만 해 보십시오.", refs:[R.brunch]},
+  {k:"own", g:"📊", h:"주간보고서 초안", s:"한 주 동안의 기록을 모아 보고서 초안을 만듭니다.", tool:"클로드코드",
+   pain:"한 주 동안 무엇을 했는지 금요일에 기억해 냅니다.",
+   flow:["금요일","한 주 기록을 모음","항목별로 묶음","보고서 초안"],
+   need:["하루 한 줄이라도 남기는 기록"],
+   hard:"기록이 없으면 자동화할 재료가 없습니다. 여기가 진짜 관문입니다.",
+   first:"오늘부터 하루 한 줄만 남겨 보십시오.", refs:[R.brunch]}]},
+
+ {t:"은퇴·1인기업", ico:"🌱", c:"var(--leaf)", items:[
+  {k:"idea", g:"🎬", h:"영상 자막과 요약", s:"올릴 영상의 자막을 뽑고 설명글 초안까지 만듭니다.", tool:"코덱스",
+   pain:"편집은 되는데 자막과 설명글에서 매번 지칩니다.",
+   flow:["영상이 준비되면","음성을 글로 옮김","문장을 다듬고 요약","자막 파일과 설명글"],
+   need:["영상 파일"],
+   hard:"고유명사는 틀리게 나옵니다. 자주 쓰는 단어 목록을 만들어 두면 크게 줄어듭니다.",
+   first:"지난 영상 하나로 먼저 시험해 보십시오.", refs:[R.ytsum]}]}
+];
+
+/* 대표 이미지는 「출처」로 확정된 자료만 쓴다 — 관련 영상·관련 글 썸네일을
+   카드 대표 이미지로 쓰면 카드 내용과 어긋나 보인다 (Owner 결정 2026-09-09) */
+function pickCover(it){
+  if (!it.refs) return null;
+  for (var i = 0; i < it.refs.length; i++) if (it.refs[i].role.indexOf('출처') === 0) return it.refs[i];
+  return null;
+}
+
+var tabsEl = document.getElementById('tabs');
+var grid = document.getElementById('grid');
+var dlg = document.getElementById('dlg');
+
+DATA.forEach(function(g, i){
+  var b = document.createElement('button');
+  b.className = 'tab';
+  b.style.setProperty('--c', g.c);
+  b.setAttribute('role','tab');
+  b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+  b.innerHTML = '<span class="ico">' + g.ico + '</span>' + g.t +
+                '<span class="n">' + String(g.items.length).padStart(2,'0') + '</span>';
+  b.onclick = function(){ select(i); };
+  tabsEl.appendChild(b);
+});
+
+function select(i){
+  Array.prototype.forEach.call(tabsEl.children, function(b, j){
+    b.setAttribute('aria-selected', i === j ? 'true' : 'false');
+  });
+  var g = DATA[i];
+  document.getElementById('listTitle').textContent = g.ico + ' ' + g.t;
+  document.getElementById('listCount').textContent = String(g.items.length).padStart(2,'0') + ' CASES';
+  grid.innerHTML = '';
+  g.items.forEach(function(it, k){
+    var kd = KIND[it.k];
+    var ref = pickCover(it);
+    var c = document.createElement('button');
+    c.className = 'card';
+    c.style.setProperty('--c', g.c);
+    c.style.animationDelay = (k * 80) + 'ms';
+    var thumbInner = '<span class="glyph">' + it.g + '</span>';
+    if (ref) {
+      thumbInner += '<img src="' + ref.th + '" alt="" loading="lazy" referrerpolicy="no-referrer" ' +
+        'onerror="this.remove()">' +
+        '<span class="src">' + ref.role + ' · <b>' + ref.p + '</b></span>';
+    }
+    c.innerHTML =
+      '<div class="thumb"><span class="kind ' + kd[1] + '">' + kd[0] + '</span>' +
+        '<span class="tool" title="' + it.tool + '">' + TOOL[it.tool] + '</span>' + thumbInner + '</div>' +
+      '<div class="cbody"><h3>' + it.h + '</h3>' +
+      '<div class="sum">' + it.s + '</div>' +
+      '<div class="chips"><span class="chip w tool-chip">' + TOOL[it.tool] + it.tool + '</span>' +
+      (it.refs.length ? '<span class="chip w">🔗 자료 ' + it.refs.length + '</span>' : '') +
+      '</div><div class="go">자세히 보기 &rarr;</div></div>';
+    c.onclick = function(){ openCase(g, it); };
+    grid.appendChild(c);
+  });
+}
+
+function openCase(g, it){
+  var kd = KIND[it.k];
+  var ref = pickCover(it);
+  document.getElementById('dHero').style.setProperty('--c', g.c);
+  document.getElementById('dGlyph').textContent = it.g;
+  var img = document.getElementById('dImg');
+  if (ref) { img.hidden = false; img.src = ref.th; img.onerror = function(){ img.hidden = true; }; }
+  else { img.hidden = true; img.removeAttribute('src'); }
+
+  document.getElementById('dMeta').innerHTML =
+    '<span class="chip w">' + kd[0] + '</span>' +
+    '<span class="chip">' + g.ico + ' ' + g.t + '</span>' +
+    '';
+  document.getElementById('dTitle').textContent = it.h;
+
+  var refsHtml = it.refs.map(function(r){
+    return '<a href="' + r.u + '" target="_blank" rel="noopener noreferrer">' +
+      '<img class="tn" src="' + r.th + '" alt="" referrerpolicy="no-referrer" onerror="this.remove()">' +
+      '<span class="tx">' + r.t + '<span>' + r.p + '</span></span>' +
+      '<span class="role">' + r.role + '</span></a>';
+  }).join('');
+  refsHtml += '<a href="' + DOC[it.tool] + '" target="_blank" rel="noopener noreferrer">' +
+      '<span class="tx">' + it.tool + ' 공식 문서<span>' + DOC[it.tool].replace('https://','') + '</span></span>' +
+      '<span class="role">문서</span></a>';
+
+  document.getElementById('dBody').innerHTML =
+    '<div class="sec"><h4>개요</h4><p class="lead">' + it.s + '</p></div>' +
+
+    '<div class="sec"><h4>목적</h4><p>' + it.pain + '</p></div>' +
+
+    '<div class="sec"><h4>자동화 내용</h4>' +
+      '<p class="hint">아래 네 칸은 어떤 자동화든 같습니다. 시작만 다르고 뒤는 같습니다.</p>' +
+      '<div class="flow">' +
+      it.flow.map(function(v, i){ return '<div><b>' + F[i] + '</b><span>' + v + '</span></div>'; }).join('') +
+    '</div></div>' +
+
+    '<div class="sec"><h4>사용 도구</h4><div class="links">' +
+      '<a href="' + DOC[it.tool] + '" target="_blank" rel="noopener noreferrer">' +
+        '<span class="tn plain">' + TOOL[it.tool] + '</span>' +
+        '<span class="tx">' + it.tool + '<span>공식 문서 보기 · ' + DOC[it.tool].replace('https://','') + '</span></span>' +
+      '</a></div></div>' +
+
+    '<div class="sec"><h4>필요한 것</h4><ul>' +
+      it.need.map(function(n){ return '<li>' + n + '</li>'; }).join('') +
+    '</ul></div>' +
+
+    '<div class="sec"><h4>어려운 지점</h4><p class="note">' + it.hard + '</p></div>' +
+
+    '<div class="sec"><h4>첫 걸음</h4><p class="note first">' + it.first + '</p></div>' +
+
+    '<div class="sec"><h4>출처</h4>' +
+      (it.refs.length
+        ? '<div class="links">' + it.refs.map(function(r){
+            return '<a href="' + r.u + '" target="_blank" rel="noopener noreferrer">' +
+              '<img class="tn" src="' + r.th + '" alt="" referrerpolicy="no-referrer" onerror="this.remove()">' +
+              '<span class="tx">' + r.t + '<span>' + r.p + '</span></span>' +
+              '<span class="role">' + r.role + '</span></a>';
+          }).join('') + '</div>'
+        : '<p class="hint">아직 공개된 사례를 찾지 못했습니다. 낙관이 제안하는 응용 아이디어입니다.</p>') +
+    '</div>';
+
+  dlg.showModal();
+}
+
+document.getElementById('dlgClose').onclick = function(){ dlg.close(); };
+dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+select(0);
+</script>
+</body>
+</html>
