@@ -119,6 +119,8 @@ main{padding:clamp(30px,4.5vw,56px) var(--pad) 100px}
 .chips{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
 .chip{font-size:13px;font-weight:700;padding:4px 12px;border:2.5px solid var(--ink);border-radius:999px;background:var(--lemon)}
 .chip.w{background:#fff}
+.chip.stale{background:#fff;border-style:dashed}
+.src .dt{font-style:normal;margin-left:auto;opacity:.75;font-size:11.5px}
 .chip.tool-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 12px 3px 5px}
 .chip.tool-chip img{width:22px;height:22px;object-fit:contain;display:block}
 .go{font-family:var(--en);font-size:13px;display:flex;align-items:center;gap:8px;transition:gap .16s}
@@ -230,6 +232,19 @@ footer .stamp{font-family:var(--en);font-size:11.5px;opacity:.6}
 </dialog>
 
 <script>
+/* 자료는 6개월이 지나면 그대로 따라 해도 안 될 수 있다.
+   오늘 날짜로 계산하므로 손대지 않아도 시간이 지나면 알아서 경고가 뜬다. */
+var STALE_MONTHS = 6;
+function isStale(d){
+  if (!d) return false;
+  var cut = new Date();
+  cut.setMonth(cut.getMonth() - STALE_MONTHS);
+  return new Date(d + "T00:00:00") < cut;
+}
+function hasStale(it){
+  return (it.refs || []).some(function(r){ return isStale(r.d); });
+}
+
 var F = ["① 무엇이 시작하나","② 모은다","③ 고른다·바꾼다","④ 내보낸다"];
 var KIND = {own:["⭐ 낙관 사례","own"], real:["📺 실사례","real"], idea:["💡 응용 아이디어",""]};
 
@@ -242,53 +257,32 @@ var DOC = {"클로드코드":"https://docs.anthropic.com/en/docs/claude-code","�
 
 /* 실제 확인된 자료 — og:image·썸네일 응답 확인 2026-09-09 */
 var R = {
-  ytBrief:{t:"학원 업무 자동화 클로드로 5분컷! 컴퓨터 꺼놔도 매일 아침 7시 입시 브리핑 도착시키는 법", p:"공감에듀테크 · YouTube", role:"출처",
+  ytBrief:{t:"학원 업무 자동화 클로드로 5분컷! 컴퓨터 꺼놔도 매일 아침 7시 입시 브리핑 도착시키는 법", p:"공감에듀테크 · YouTube", role:"출처", d:"2026-07-30",
     u:"https://www.youtube.com/watch?v=BkyIuCua_58",
     th:"https://img.youtube.com/vi/BkyIuCua_58/hqdefault.jpg"},
-  ytSms:{t:"[AI자동화학교 20강] 예약문자, 아직도 손으로 보내세요? 구글시트 맞춤형 예약 문자 자동 발송 시스템 만들기", p:"조현정의AI실험실 · YouTube", role:"출처 · 앱스 스크립트 사례",
+  ytSms:{t:"[AI자동화학교 20강] 예약문자, 아직도 손으로 보내세요? 구글시트 맞춤형 예약 문자 자동 발송 시스템 만들기", p:"조현정의AI실험실 · YouTube", role:"출처 · 앱스 스크립트 사례", d:"2026-04-15",
     u:"https://www.youtube.com/watch?v=i4ucoa7l1Fs",
     th:"https://img.youtube.com/vi/i4ucoa7l1Fs/hqdefault.jpg"},
-  ytOrder:{t:"[AI 발주 자동화] 딸칵 한번에 26개 공급사로 자동 발주!", p:"장사는AI빨 · YouTube", role:"관련 영상",
+  ytOrder:{t:"[AI 발주 자동화] 딸칵 한번에 26개 공급사로 자동 발주!", p:"장사는AI빨 · YouTube", role:"관련 영상", d:"2026-06-19",
     u:"https://www.youtube.com/watch?v=fYNTEGNbcx0",
     th:"https://img.youtube.com/vi/fYNTEGNbcx0/hqdefault.jpg"},
-  picks:{t:"클로드 코드로 뭐부터 자동화할까 — 실무자 4명이 고른 업무", p:"지피터스", role:"출처",
+  picks:{t:"클로드 코드로 뭐부터 자동화할까 — 실무자 4명이 고른 업무", p:"지피터스", role:"출처", d:"2026-08-18",
     u:"https://www.gpters.org/news/post/claude-code-automation-picks-V17sdSmztTgL1q8",
     th:"https://tribe-s3-production.imgix.net/ERbXw4Ebvbm08JHJL5S2b?fit=max&w=1000&auto=compress,format"},
-  interview:{t:"클로드코드 스킬로 업무 자동화 인터뷰 해 보기", p:"지피터스", role:"출처",
+  interview:{t:"클로드코드 스킬로 업무 자동화 인터뷰 해 보기", p:"지피터스", role:"출처", d:"2026-03-19",
     u:"https://www.gpters.org/nocode/post/interview-business-automation-Lit7tHS8ivSSnvY",
     th:"https://tribe-s3-production.imgix.net/pnfvBIDjYr2STfqVZRMV3?fit=max&w=1000&auto=compress,format"},
-  vod:{t:"AI로 VOD 스크립트와 강의 발표자료 만든 후기", p:"지피터스", role:"출처",
+  vod:{t:"AI로 VOD 스크립트와 강의 발표자료 만든 후기", p:"지피터스", role:"출처", d:"2026-03-22",
     u:"https://www.gpters.org/nocode/post/review-creating-vod-scripts-pKLSZb5YiM72RsZ",
     th:"https://tribe-s3-production.imgix.net/Rb7bPSKFCmGazzcAfQuAj?fit=max&w=1000&auto=compress,format"},
-  leads:{t:"n8n으로 신규 리드 이메일 자동 발송 → 앱스 스크립트로 작전 변경", p:"지피터스", role:"출처",
-    u:"https://www.gpters.org/wealth/post/n8n-made-new-leads-s1f78K1a297miDx",
-    th:"https://tribe-s3-production.imgix.net/c4DYngf34tTAs6cRoj8mh?fit=max&w=1000&auto=compress,format"},
-  baby:{t:"클로드코드 걸음마 — 엑셀 함수 몰라도 괜찮다고요?", p:"지피터스", role:"출처",
+  baby:{t:"클로드코드 걸음마 — 엑셀 함수 몰라도 괜찮다고요?", p:"지피터스", role:"출처", d:"2026-03-22",
     u:"https://www.gpters.org/llm-service/post/claude-code-baby-okay-vllPC4PSKy5R9Cp", th:""},
-  vault:{t:"클로드 코드로 기존 업무자료를 옵시디언에 차근차근 정리하기", p:"지피터스", role:"출처",
+  vault:{t:"클로드 코드로 기존 업무자료를 옵시디언에 차근차근 정리하기", p:"지피터스", role:"출처", d:"2026-03-31",
     u:"https://www.gpters.org/nocode/post/organize-existing-work-data-ES7WtVv08hsv7ce", th:""},
-  reClaude:{t:"부동산 업무 자동화 시스템 구축해보기 — 중복·허위매물 정리", p:"지피터스", role:"출처 · 기획 단계",
-    u:"https://www.gpters.org/nocode/post/establish-real-estate-business-hG3A3oGzj2Cx2W9",
-    th:"https://tribe-s3-production.imgix.net/oBUQFSPLBFFIj23vwjs3d?fit=max&w=1000&auto=compress,format"},
-  reN8n:{t:"N8N으로 부동산 중개 매물 소개 블로그 자동화 하기", p:"지피터스", role:"출처 · n8n 사례",
-    u:"https://www.gpters.org/nocode/post/n8neuro-budongsan-junggae-maemul-sogae-beulrogeu-jadonghwa-hagi-4M0T4N2rRA8sT1j",
-    th:"https://tribe-s3-production.imgix.net/x5mcC8ImVNTkRUc1HlmgT?fit=max&w=1000&auto=compress,format"},
-  hoc:{t:"비개발자 마케터의 클로드 코드 활용법 — 광고·콘텐츠 자동화 실전 사례", p:"High Output Club", role:"출처",
-    u:"https://blog.highoutputclub.com/claude-code-marketing-automation/",
-    th:"https://storage.ghost.io/c/b6/51/b651c236-8ffa-4b60-89e0-a48718ab78eb/content/images/2026/02/------------------------------------------------------------------------------------------------_----------------------------------------------------------------------------------------------.png"},
-  brunch:{t:"따라하기만 하면 되는 클로드코드 업무 자동화 (완결판)", p:"brunch", role:"출처",
-    u:"https://brunch.co.kr/@sukistory/84",
-    th:"https://img1.kakaocdn.net/thumb/R1280x0.fpng/?fname=http://t1.kakaocdn.net/brunch/service/user/8I37/image/dop087EFyTjIB1DSnAsLe8B7iPI.png"},
-  noshow:{t:"노쇼율 낮춘 병원들의 공통점 — 다단계 리마인드 구조", p:"세이프닥", role:"관련 글",
+  noshow:{t:"노쇼율 낮춘 병원들의 공통점 — 다단계 리마인드 구조", p:"세이프닥", role:"관련 글", d:"2026-07-08",
     u:"https://safedoc.io/blog/no-show-rate-lowering-hospital-strategies",
     th:"https://image.inblog.dev/?url=https%3A%2F%2Fsource.inblog.dev%2Ffeatured_image%2F2026-06-29T06%3A41%3A31.037Z-5fbed66c-9a88-40ac-9868-d2be04d53856&w=1200&q=85&format=jpg&v=2026-06-29T06%3A41%3A32.073Z"},
-  medi:{t:"병·의원 울리는 노쇼(No-show)의 덫", p:"데일리메디", role:"근거 기사",
-    u:"https://www.dailymedi.com/detail.php?number=814267",
-    th:"https://www.dailymedi.com/img/d_logo.jpg"},
-  jandi:{t:"학원 퇴원 시그널, AI 학생 관리 자동화 (웨비나 인사이트)", p:"잔디 블로그", role:"관련 글",
-    u:"https://blog.jandi.com/ko/2025/08/13/edu-webinar-insight-01/",
-    th:"https://blog.jandi.com/ko/wp-content/uploads/sites/4/2025/08/edu-webinar-new.png"},
-  ytsum:{t:"유튜브 요약 자동화 5단계 — 새 영상을 AI가 노션에 자동 정리", p:"HowtoAI", role:"관련 글",
+  ytsum:{t:"유튜브 요약 자동화 5단계 — 새 영상을 AI가 노션에 자동 정리", p:"HowtoAI", role:"관련 글", d:"2026-06-11",
     u:"https://www.how-toai.com/blog/youtube-summary-automation-notion-5-steps-2026",
     th:"https://www.how-toai.com/images/posts/youtube-summary-automation-notion-5-steps-2026-thumb.webp"}
 };
@@ -306,48 +300,6 @@ var DATA = [
    first:"명단이 종이에 있다면, 우선 열 이름만 정해 파일 하나로 옮겨 보십시오.",
    srcNote:"⚠️ 자동화 <b>제작은 아직 예정 단계</b>입니다(워크샵에서 만들 계획). 지금 확인되는 것은 「무엇을 고를지」와 「세팅에서 겪은 문제」입니다.",
    refs:[R.baby]},
-  {k:"real", g:"🔍", h:"중복·허위 매물 걸러내기", s:"같은 물건이 여러 번 올라온 것과 시세에서 벗어난 가격을 걸러내는 구조입니다.", tool:"클로드코드",
-   pain:"매물이 여러 경로로 들어오면 같은 물건이 서로 다른 정보로 중복됩니다. 눈으로 대조하다 놓치고, 없는 물건을 손님에게 안내하게 됩니다.",
-   flow:["새 매물이 들어오면","등록된 매물을 전부 읽어 옴","주소·면적·가격·이미지로 중복과 허위를 판별","신뢰도를 색으로 표시"],
-   steps:["반복하는 업무를 전부 적고 행동 단위로 쪼갠다",
-          "어디서 막히는지(병목) 찾는다",
-          "자동화가 오히려 더 큰 문제를 만들지 따져 본다 — 저자는 <b>고객 상담과 계약은 실수하면 금전 손해</b>가 나므로 후순위로 미뤘다",
-          "고른 업무로 PRD(무엇을 만들 것인가 문서)를 쓴다",
-          "그 문서를 클로드코드에 주고 골격을 만들게 한다",
-          "기능 명세·DB·API·일정으로 벌린다"],
-   numbers:["중복 1단계 — 주소 완전 일치 / 면적+층수 일치 / 가격 오차 범위 내 일치",
-            "중복 2단계 — 주소 유사도 <b>90% 이상</b>, 가격 <b>±5%</b>, 면적 <b>±9㎡</b>",
-            "중복 3단계 — 이미지 유사도, 설명문 유사도",
-            "허위 의심 — <b>시세 대비 15% 이하</b> 가격",
-            "신뢰도 표시 — 0~30 빨강(허위 의심) / 31~70 노랑(확인 필요) / 71~100 초록(신뢰 가능)",
-            "수집 주기 — 기본 30분, 심야 00~06시는 2시간"],
-   pitfall:"저자는 「생각의 꼬리에 꼬리를 물고」 가다 본업을 소홀히 했다고 적었습니다. 골격을 꼼꼼히 봐도 수정할 데가 많이 생길 것 같다고도 했습니다. 기술 위험으로는 크롤링 차단, 대량 데이터 처리 속도, 외부 API 제한·변경 세 가지를 꼽았습니다.",
-   need:["매물 목록 (주소·면적·층수·가격)","허위 판정에 쓸 시세 기준","필터 조건 (지역·가격대·면적·층수·건물 유형)"],
-   hard:"판별 기준을 숫자로 정하는 일이 본체입니다. 위 수치는 저자가 정한 <b>설계 기준</b>이라 그대로 쓰지 말고 내 지역·물건 종류에 맞게 조정해야 합니다.",
-   first:"지금 목록에서 같은 물건으로 의심되는 두 건을 찾아, 무엇이 같고 무엇이 다른지 적어 보십시오. 그게 기준의 초안입니다.",
-   srcNote:"⚠️ 출처는 <b>기획(PRD·명세서) 단계까지</b> 공개돼 있고 구현 결과는 다음 편 예고 상태입니다. 위 기준·수치는 실측값이 아니라 저자의 설계 목표입니다.",
-   refs:[R.reClaude]},
-  {k:"real", g:"✍️", h:"매물 소개 글 자동 작성", s:"새로 들어온 매물을 매일 아침 감지해 사진 설명·인사말·해시태그까지 붙은 글 초안을 만듭니다.", tool:"클로드코드",
-   pain:"매물이 들어올 때마다 소개 글을 처음부터 씁니다. 쓰는 일에 지쳐 미루면 매물이 그대로 묻힙니다.",
-   flow:["매일 아침 6시","시트에서 「대기」 상태 매물과 날씨를 읽어 옴","층 정보 분리·주소 분석·사진 분류 후 문장으로 변환","문서 하나로 통합하고 「작업완료」 표시"],
-   steps:["아침 6시에 시트에서 신규 매물을 확인한다",
-          "날씨를 불러온다 (인사말에 쓴다)",
-          "매물을 한 건씩 처리한다 — 층 정보 분리, 주소 분석, 지도 이미지 생성",
-          "사진을 분석해 사진마다 설명을 붙인다",
-          "인사말·마무리·임대 정보·해시태그·제목을 만든다",
-          "문서 하나로 합쳐 올리고 시트에 「작업완료」를 적는다"],
-   numbers:["실행 — 매일 아침 <b>6시</b>",
-            "트리거 — 「작업상태」 열이 <b>대기</b>인 행만",
-            "매물 식별 — 매물번호",
-            "시트 원칙 — <b>열 하나에 정보 하나</b> (층·평처럼 건물마다 다른 값만 한 칸에 넣고 쉼표로 구분)",
-            "사진 — 파일명 규칙으로 건물소개·내부·외부·부대시설 <b>4종</b>으로 분류, 층·호실별로 묶어 <b>대표사진만</b> 분석해 비용을 줄였다"],
-   prompts:["JSON을 그대로 넣으면 결과에 잘 반영되지 않아, <b>마크다운으로 바꾸는 중간 단계</b>를 여러 개 넣었다 — 저자가 찾은 해결책"],
-   pitfall:"위도·경도를 픽셀로 바꾸는 방식은 실제 지도와 오차가 계속 나서 폐기했습니다. 단계 사이에 데이터가 제대로 넘어가지 않아 복제용 단계를 따로 넣었고, 원인은 아직 모른다고 적었습니다. 글 서식을 살려 올리는 데도 실패해 텍스트만 올라갑니다. 저자 본인이 <b>아직 상용 수준은 아니라고</b> 밝혔습니다.",
-   need:["매물을 적는 시트 (매물번호·작업상태 열 필수)","이름 규칙을 맞춘 사진 폴더","지도·날씨 등 외부 자료를 불러올 계정"],
-   hard:"한 칸에 여러 정보를 넣으면 결과가 흐려집니다. 그리고 <b>매물 위치가 그대로 노출되지 않도록</b> 저자는 지도 중심을 실제 위치와 다르게 흐트리는 처리를 따로 넣었습니다 — 손님 정보가 걸린 자동화에서는 이런 안전장치가 먼저입니다.",
-   first:"매물 시트의 열 이름을 정리하고 「작업 상태」 칸을 하나 추가해 보십시오.",
-   srcNote:"⚠️ 이 사례는 <b>n8n</b>으로 구현됐습니다. 우리 트랙 도구(클로드코드·코덱스)로는 같은 흐름을 코드로 만들게 됩니다.",
-   refs:[R.reN8n]},
   {k:"idea", g:"📅", h:"계약 만기 미리 알림", s:"만기 30일 전과 7일 전에 대상자 목록과 연락 문구 초안을 만들어 둡니다.", tool:"코덱스",
    pain:"만기는 대부분 기억으로 관리됩니다. 한 건 놓치면 그대로 매출입니다.",
    flow:["매일 아침","계약 목록을 읽음","날짜를 계산해 대상만 추림","목록과 문구 초안을 전달"],
@@ -366,17 +318,6 @@ var DATA = [
    first:"이번 주 실적을 몇 군데에서 모았는지 그 개수만 세어 보십시오.",
    srcNote:"같은 글의 <b>영업·유통 담당자 사례</b>입니다. 구현 상세는 공개되지 않았고, 무엇을 골랐고 어떤 형태가 됐는지까지 확인됩니다.",
    refs:[R.picks]},
-  {k:"real", g:"📬", h:"신규 문의 아침 알림", s:"매일 아침 9시에 새로 들어온 문의만 골라 메일로 받습니다.", tool:"코덱스",
-   pain:"문의가 들어와도 바로 보지 못합니다. 늦게 연락하면 이미 다른 곳과 이야기가 끝나 있습니다.",
-   flow:["매일 아침 9시","문의 목록을 읽어 옴","등록일이 오늘인 건만 걸러냄","표로 정리해 메일 발송"],
-   steps:["매일 아침 9시에 자동 실행한다","시트에서 문의 목록을 읽는다","등록일이 오늘인 건만 남긴다","표로 정리한다","지정한 주소로 메일을 보낸다"],
-   numbers:["트리거 — 매일 <b>09:00</b>","메일 제목 — 「📬 오늘의 신규 리드」","시트 열 — 이름·이메일·연락처·메시지·액션아이템","시트 변경 감지는 실시간이 안 되고 <b>5~10분 주기로 확인</b>하는 방식"],
-   pitfall:"처음에 AI가 거대한 에이전트 도구들을 제안해 범위가 커졌습니다. 저자는 「또 다시 늪에 빠져가는 기분」이라고 적었습니다. 결국 n8n도 접고 <b>구글 앱스 스크립트</b>로 갔습니다 — 메일·시트·발송이 모두 구글 안에서 끝나고 별도 화면도 외부 연결도 필요 없어서입니다. 글의 결론은 「중요한 것은 툴이 아니라, 올바른 문제 정의가 먼저!」입니다.",
-   need:["문의가 쌓이는 시트 또는 메일 라벨","메일 발송 수단"],
-   hard:"도구를 먼저 고르면 늪에 빠집니다. 이 글의 값은 완성품이 아니라 <b>도구를 두 번 바꾸기까지의 시행착오</b>입니다.",
-   first:"지금 문의가 어디로 들어오는지(메일·폼·전화) 적어 보십시오.",
-   srcNote:"도구 선택까지 다루고 「to be continue…」로 끝납니다. 최종 코드는 공개되지 않았습니다.",
-   refs:[R.leads]},
   {k:"idea", g:"🎁", h:"고객 기념일 알림과 인사 초안", s:"생일과 계약 기념일을 미리 알려 주고, 사람마다 다른 인사 문구를 초안으로 뽑습니다.", tool:"클로드코드",
    pain:"인사는 마음이 아니라 타이밍입니다. 지나고 나서 알면 차라리 안 보내는 편이 낫습니다.",
    flow:["매일 아침","고객 목록을 읽음","오늘과 이번 주 대상을 추림","이름별 문구 초안"],
@@ -433,7 +374,7 @@ var DATA = [
    flow:["수업이 끝난 뒤","그날 메모를 모음","학생별로 묶음","학생 카드를 갱신"],
    need:["수업 메모를 적는 곳 하나"],
    hard:"메모가 손글씨면 옮기는 단계가 하나 더 붙습니다.",
-   first:"이번 주 메모를 한 파일에 모아 보십시오.", refs:[R.jandi]},
+   first:"이번 주 메모를 한 파일에 모아 보십시오.", refs:[]},
   {k:"idea", g:"✉️", h:"학부모 안내문 초안", s:"공지할 내용 몇 줄을 넣으면 학부모용 안내문 문장으로 바꿔 줍니다.", tool:"코덱스",
    pain:"내용 정하는 데 5분, 문장 다듬는 데 40분이 걸립니다.",
    flow:["안내할 일이 생겼을 때","요점 몇 줄을 입력","안내문 톤으로 변환","보낼 형태로 출력"],
@@ -466,45 +407,20 @@ var DATA = [
    hard:"환자 정보를 다루므로 밖으로 내보내지 않는 구조로 짜야 합니다. 그리고 <b>수동 발송으로 먼저 검증</b>한 뒤 자동으로 넘기는 순서가 안전합니다.",
    first:"예약 명단을 시트 한 장으로 옮기고, 고객명·전화번호·예약날짜 세 열만 맞춰 두십시오.",
    srcNote:"⚠️ 이 사례는 <b>구글 앱스 스크립트</b>로 구현됐습니다(우리 트랙 도구가 아닙니다). 같은 흐름을 클로드코드·코덱스로도 만들 수 있고, <b>고쳐 가며 완성하는 대화 방식</b>은 그대로 쓸 수 있습니다. 영상은 네일샵 예약 데이터로 시연합니다.",
-   refs:[R.ytSms, R.noshow, R.medi]},
+   refs:[R.ytSms, R.noshow]},
   {k:"idea", g:"🗓️", h:"예약 리마인드 3번 보내기", s:"접수 즉시·확정 시·당일 오전, 세 시점의 명단과 안내 문구를 자동으로 만듭니다.", tool:"클로드코드",
-   pain:"예약 불이행은 대부분 잊어서 생깁니다. 서울대병원이 예약부도 환자 600명에게 이유를 물었을 때 78%가 「예약에 대한 책임감이 전혀 없었다」로 조사됐습니다. 나머지 22%는 절차가 까다롭거나 통화가 안 됐다는 이유였습니다.",
+   pain:"예약 불이행은 대부분 잊어서 생깁니다. 그런데 접수 당일에 확인 문자 한 번 보내는 것으로는 며칠 뒤의 약속을 붙잡아 두지 못합니다.",
    flow:["예약이 접수되면","예약 자료를 읽음","세 시점(접수·확정·당일 오전)을 계산","시점별 명단과 문구"],
-   numbers:["일선 의료기관 부도율 — <b>하루 평균 10% 안팎</b>",
-            "병원 연간 예약부도율 <b>18%</b> — 5대 서비스 업종 중 두 번째로 높다 (예약자 5명 중 1명)",
-            "<b>서울대병원은 카카오톡 알림 도입 전 13% → 도입 후 8.6%</b> — 알림 하나로 실제로 내려간 수치",
-            "병원 부문 연간 손실 산출액 <b>8,100억원</b> (5대 업종 합계 4조5,000억원 중)",
-            "리마인드 시점은 <b>접수 즉시 · 예약 확정 · 당일 오전</b> 3회 — 노쇼율이 낮은 병원들의 공통점"],
-   pitfall:"예약 접수 당일 한 번 보내는 확인 문자만으로는 부족하다고 지적됩니다. 예약금을 걸면 부작용이 따르므로, 예약금 없이 다단계 알림으로 푸는 쪽이 실제 효과를 봤습니다.",
+   numbers:["리마인드 시점은 <b>접수 즉시 · 예약 확정 · 당일 오전</b> 3회 — 노쇼율이 낮은 곳들의 공통점으로 꼽힌다",
+            "예약금을 걸면 부작용이 따르므로, <b>예약금 없이 다단계 알림</b>으로 푸는 쪽이 현실적이다"],
+   pitfall:"별도 관리 프로그램을 사거나 발송 솔루션을 계약하고 직원 교육까지 하려면 비용과 시간이 크게 듭니다. 그래서 <b>지금 쓰는 예약 자료 위에 얹는 방식</b>이 시작점으로 낫습니다.",
    need:["예약 목록","보낼 통로 (문자·알림톡 등)"],
    hard:"환자 정보는 밖으로 내보내지 않는 구조로 짜야 합니다. 이 조건이 설계의 출발점입니다. 그리고 한 번만 보내면 효과가 얕습니다 — 세 시점을 나누는 것이 핵심입니다.",
    first:"예약을 어디에 적고 있는지부터 확인해 보십시오. 그 자료가 있으면 나머지는 날짜 계산입니다.",
-   srcNote:"위 수치는 기사·분석 자료에서 확인된 <b>업계 통계</b>입니다. 이 자동화를 직접 만들어 공개한 개인 사례는 찾지 못해 <b>응용 아이디어</b>로 둡니다.",
-   refs:[R.noshow, R.medi]}]},
+   srcNote:"이 카드는 <b>구조에 대한 분석 자료</b>에 기댄 응용 아이디어입니다. 같은 탭의 「예약 전날 문자 자동 발송」이 실제로 만든 사례이니 그쪽을 먼저 보십시오.",
+   refs:[R.noshow]}]},
 
  {t:"자영업·소매·서비스", ico:"🛒", c:"var(--lav)", items:[
-  {k:"real", g:"📣", h:"광고 성과 정리와 소재 만들기", s:"광고 성과 파일을 넣으면 성과가 낮은 소재를 찾아내고 새 문구 후보까지 만들어 줍니다.", tool:"클로드코드",
-   pain:"광고는 돌려 놓고 성과 확인은 미룹니다. 소재를 바꿔야 할 시점을 지나서 압니다.",
-   flow:["정한 주기마다","광고 성과 파일(CSV)을 넣음","성과가 낮은 소재를 찾음","새 문구 후보와 리포트"],
-   steps:["광고 관리 화면에서 성과를 CSV로 내린다",
-          "그 파일을 클로드코드에 넣는다",
-          "성과가 낮은 광고를 골라낸다",
-          "새 문구 후보를 만든다",
-          "무엇을 시험했고 결과가 어땠는지 기록해 둔다",
-          "다음에 만들 때 그 기록을 자동으로 참고하게 한다"],
-   numbers:["같은 작업 <b>2시간 → 15분</b>",
-            "디자인 도구와 붙여 <b>한 번에 최대 100개</b> 문구 변형을 0.5초에 배치",
-            "매번 전체 지시문을 넣던 방식(약 6만 토큰)을 자료 분리로 <b>5천 토큰(92% 절감)</b>",
-            "역할을 나눈 뒤 결과 품질이 눈에 띄게 올라갔다 — 제목 담당과 설명 담당을 <b>따로</b> 두었다"],
-   prompts:["\"지난주 캠페인별 지출이 얼마야?\"",
-            "\"가장 효과 좋았던 광고 소재 보여줘.\"",
-            "\"API가 있는 반복 작업을 찾아라.\" — 자동화 대상을 고르는 기준",
-            "바로 만들지 말고 <b>먼저 대화로 다듬어라</b> — 요청 문장을 채팅에서 정리한 뒤 실행에 넘기라는 조언"],
-   pitfall:"처음에는 매번 지시문 전체를 넣어 비용이 문제가 됐습니다(약 6만 토큰). 자료를 파일로 분리하고 경로만 넘기는 방식으로 바꿔 해결했습니다. 그리고 한 곳에 전부 맡기면 품질이 들쭉날쭉해서 <b>역할을 쪼갰습니다.</b>",
-   need:["광고 성과를 CSV로 내릴 수 있는 권한"],
-   hard:"플랫폼마다 지표 이름이 달라 처음 한 번 용어를 맞춰야 합니다. 저자가 강조한 것은 기술이 아니라 <b>무엇을 자동화할지 정하는 질문</b>이었습니다.",
-   first:"지금 돌리는 광고의 성과를 어디서 내리는지 그 화면부터 찾아 두십시오. CSV 한 장이 시작입니다.",
-   refs:[R.hoc]},
   {k:"idea", g:"🧾", h:"매일 매출 정산 표", s:"영수증과 주문 내역을 모아 하루 정산 표를 자동으로 만듭니다.", tool:"코덱스",
    pain:"문을 닫고 계산기를 두드립니다. 매일 30분이 그렇게 사라집니다.",
    flow:["영업 종료 시","그날 자료를 모음","항목별 합계와 오차를 확인","일일 정산 표"],
@@ -525,26 +441,6 @@ var DATA = [
    refs:[R.ytOrder]}]},
 
  {t:"직장인 공통", ico:"💼", c:"var(--tang)", items:[
-  {k:"real", g:"🚀", h:"클로드코드 설치하고 첫 실행까지", s:"검은 화면을 처음 여는 분을 위한 순서입니다. 여기까지가 이 트랙의 첫 관문입니다.", tool:"클로드코드",
-   pain:"자동화를 배우기도 전에 설치에서 막혀 멈춥니다. 이 트랙에서 사람이 가장 많이 이탈하는 지점이 여기입니다.",
-   flow:["내가 명령을 한 줄 입력하면","작업 폴더의 자료를 읽어 옴","요청한 대로 처리","결과를 파일로 남김"],
-   steps:["Node.js를 설치한다 (v18 이상)",
-          "터미널을 연다 — 맥은 터미널, 윈도우는 <b>Git Bash</b>",
-          "<b>npm install -g @anthropic-ai/claude-code</b> 를 입력한다",
-          "작업용 <b>빈 폴더</b>를 하나 만든다",
-          "터미널에서 <b>cd 폴더경로</b> 로 그 폴더로 이동한다",
-          "<b>claude</b> 라고 입력해 실행하고, 첫 화면에서 1을 고른다",
-          "무엇을 하고 싶은지 말로 요청한다 — 승인을 물으면 계속 1을 누른다"],
-   prompts:["\"이 PDF 10개를 하나로 합쳐줘\"",
-            "\"엑셀 A, B, C열만 추출해서 새 파일로\""],
-   numbers:["유료 구독이 있어야 씁니다",
-            "폴더 구조는 <b>내가 만드는 게 아니라</b> 클로드코드가 만들어 줍니다 — 처음에 복잡해 보여도 넘어가면 됩니다",
-            "자료를 폴더에 잘 정리해 둘수록 결과가 좋아집니다",
-            ".md 파일은 메모장 글과 크게 다르지 않습니다 — #·* 같은 기호로 제목과 목록을 표시하는 것뿐입니다"],
-   need:["Node.js v18 이상","터미널(맥) 또는 Git Bash(윈도우)","작업용 빈 폴더 하나","유료 구독"],
-   hard:"막히는 곳은 대개 설치가 아니라 <b>「무엇을 시킬지」</b>입니다. 폴더 구조를 이해하려 애쓰지 말고, 내 업무 자료를 폴더에 넣고 말로 시켜 보는 편이 빠릅니다.",
-   first:"빈 폴더를 하나 만들고 <b>claude</b> 를 띄우는 것까지만 오늘 해 보십시오. 화면이 열리면 그날 몫은 끝입니다.",
-   refs:[R.brunch]},
   {k:"real", g:"🎯", h:"무엇을 자동화할지 고르는 법", s:"첫 대상을 잘못 고르면 며칠 만들고 안 쓰게 됩니다. 실무자 4명이 실제로 쓴 기준입니다.", tool:"클로드코드",
    pain:"시작할 때 가장 어려운 건 도구 사용법이 아니라 <b>무엇을 자동화할지 고르는 일</b>입니다. 대상을 잘못 고르면 며칠 만들고 안 쓰게 됩니다.",
    flow:["이번 주에 2회 이상 한 일을 적는다","캘린더·메일함에서 근거를 모은다","남의 손이 필요 없는 것만 남긴다","결과가 파일이나 표로 나오는 것을 고른다"],
@@ -674,7 +570,8 @@ function select(i){
     if (ref) {
       thumbInner += '<img src="' + ref.th + '" alt="" loading="lazy" referrerpolicy="no-referrer" ' +
         'onerror="this.remove()">' +
-        '<span class="src">' + ref.role + ' · <b>' + ref.p + '</b></span>';
+        '<span class="src">' + ref.role + ' · <b>' + ref.p + '</b>' +
+        (ref.d ? '<i class="dt">' + ref.d + '</i>' : '') + '</span>';
     }
     c.innerHTML =
       '<div class="thumb"><span class="kind ' + kd[1] + '">' + kd[0] + '</span>' +
@@ -683,6 +580,7 @@ function select(i){
       '<div class="sum">' + it.s + '</div>' +
       '<div class="chips"><span class="chip w tool-chip">' + TOOL[it.tool] + it.tool + '</span>' +
       (it.refs.length ? '<span class="chip w">🔗 자료 ' + it.refs.length + '</span>' : '') +
+      (hasStale(it) ? '<span class="chip stale">⏳ 오래된 자료</span>' : '') +
       '</div><div class="go">자세히 보기 &rarr;</div></div>';
     c.onclick = function(){ openCase(g, it); };
     grid.appendChild(c);
@@ -707,7 +605,8 @@ function openCase(g, it){
   var refsHtml = it.refs.map(function(r){
     return '<a href="' + r.u + '" target="_blank" rel="noopener noreferrer">' +
       '<img class="tn" src="' + r.th + '" alt="" referrerpolicy="no-referrer" onerror="this.remove()">' +
-      '<span class="tx">' + r.t + '<span>' + r.p + '</span></span>' +
+      '<span class="tx">' + r.t + '<span>' + r.p +
+        (r.d ? ' · ' + r.d + (isStale(r.d) ? ' ⏳' : '') : '') + '</span></span>' +
       '<span class="role">' + r.role + '</span></a>';
   }).join('');
   refsHtml += '<a href="' + DOC[it.tool] + '" target="_blank" rel="noopener noreferrer">' +
@@ -752,6 +651,7 @@ function openCase(g, it){
     '<div class="sec"><h4>첫 걸음</h4><p class="note first">' + it.first + '</p></div>' +
 
     '<div class="sec"><h4>출처</h4>' +
+      (hasStale(it) ? '<p class="note warn">⏳ <b>발행된 지 6개월이 넘은 자료입니다.</b> 도구가 빠르게 바뀌어서 화면과 순서가 지금과 다를 수 있습니다. 흐름과 판단 기준만 참고하시고, 세부 절차는 최신 문서를 확인하십시오.</p>' : '') +
       (it.srcNote ? '<p class="note warn srcnote">' + it.srcNote + '</p>' : '') +
       (it.refs.length
         ? '<div class="links">' + it.refs.map(function(r){
