@@ -213,6 +213,8 @@ footer p + p{margin-top:6px}
 }
 
 @media (min-width:900px) and (max-width:999px){ .plan h3 .min{flex-basis:100%;margin-left:0} }
+/* 설문 칸이 476~576px로 좁아지는 PC 폭에서는 설문이 길어진다(재검수 N-1) */
+@media (min-width:900px) and (max-width:1063px){ .form-box iframe{height:1200px} }
 
 /* 시간표 막대가 처음 한 번 왼쪽부터 자란다 */
 @media (prefers-reduced-motion:no-preference){
@@ -258,7 +260,7 @@ body{background:
     <div class="duo-in">
       <div class="pair head">
         <div class="side d"><h3 class="name">배포형</h3><p class="coach">담당 RomanSun</p><p class="lead">한 번 만들어 GitHub에 올려 두면 그다음은 알아서 돌아요.</p></div>
-        <div class="side s"><h3 class="name">세션형</h3><p class="coach">담당 낙관</p><p class="lead">매번 하던 설명(역할과 절차)을 파일에 적어 두면, 부를 때 따로 지시하지 않아도 에이전트가 끝까지 처리해요.</p></div>
+        <div class="side s"><h3 class="name">세션형</h3><p class="coach">담당 낙관</p><p class="lead">매번 하던 설명(역할과 절차)을 파일에 적어 두면, 부를&nbsp;때 따로 지시하지 않아도 에이전트가 끝까지 처리해요.</p></div>
       </div>
       <div class="pair">
         <span class="seam-q">언제 시작해요?</span>
