@@ -3,841 +3,388 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>자동화 소재 — 세인투 실행조 시즌2 자동화 트랙</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Jua&family=Gothic+A1:wght@400;500;700&display=swap" rel="stylesheet">
+<title>6, 7주차 정기 Zoom 미팅 운영 방식 | 자동화 트랙</title>
+<meta name="description" content="세인투 실행조 시즌2 자동화 트랙 6, 7주차 정기 Zoom 미팅 운영 방식 설문. 1분이면 끝나요. 마감 10/12(월) 밤 12시.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:,">
+<meta property="og:type" content="website">
+<meta property="og:title" content="6, 7주차 정기 Zoom 미팅 운영 방식">
+<meta property="og:description" content="1분 설문이에요. 마감 10/12(월) 밤 12시">
+<meta property="og:url" content="https://beoptimistic0228-gif.github.io/automation-sourcebook/">
+<meta property="og:image" content="https://beoptimistic0228-gif.github.io/automation-sourcebook/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="6, 7주차 정기 Zoom 미팅 운영 방식 설문 안내">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
+/* 낙관 PPT Design System v1 토큰(정본: nakgwan-hq/docs/design/references/huddling/01-디자인-시스템.md) */
 :root{
-  --cream:#FFF6E5; --cream-2:#FFEFD2; --ink:#1C1A16; --ink-70:#57524A;
-  --coral:#FF6B4A; --lemon:#FFCE2E; --mint:#2FC9A4; --sky:#4FA8FF; --lav:#9B8CFF; --tang:#FF9B3D; --leaf:#7BD44A;
-  --disp:"Jua",sans-serif; --sans:"Gothic A1",sans-serif; --en:"Fredoka",sans-serif;
-  --pad:clamp(18px,4.5vw,72px);
-  --shadow:5px 5px 0 var(--ink); --shadow-lg:9px 9px 0 var(--ink);
+  --bg:#000000; --cover:#181821; --card:#252524; --raised:#3B3B3B;
+  --chip:rgba(255,255,255,.12); --glass:rgba(255,255,255,.06); --glass-b:rgba(255,255,255,.20); --box:rgba(255,255,255,.12);
+  --accent:#DE1A55; --accent-rgb:222,26,85; --accent-b:rgba(var(--accent-rgb),.60);
+  /* 톤 A의 분홍 면 아래쪽 음영(accent 80%를 검정 위에 얹은 값, Owner 10/10) */
+  --accent-shade:#B21645;
+  --text:#FFFFFF; --text-2:rgba(255,255,255,.70); --muted:#898989;
+  /* 유채색은 accent 하나만 쓴다. 배포형은 흰색, 세션형은 accent로 가른다 */
+  --deploy:#FFFFFF; --on-deploy:#000000; --session:var(--accent); --on-session:#FFFFFF;
+  --together:#3B3B3B; --wrap:rgba(255,255,255,.10);
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --pad:20px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:var(--sans);font-size:17px;line-height:1.75;color:var(--ink);
-  background:var(--cream);
-  background-image:radial-gradient(var(--cream-2) 2.4px, transparent 2.4px);
-  background-size:22px 22px;-webkit-font-smoothing:antialiased;
-  animation:drift 8s linear infinite;
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:var(--sans);font-size:16px;line-height:1.65;color:var(--text);background:var(--bg);
+  -webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:1160px;margin:0 auto;padding:0 var(--pad)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* 표지 */
+.cover{background:var(--cover);position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;right:-18vw;bottom:-46vw;width:80vw;height:80vw;max-width:1000px;max-height:1000px;
+  border-radius:50%;background:radial-gradient(closest-side,rgba(var(--accent-rgb),.55),rgba(var(--accent-rgb),.18) 55%,rgba(var(--accent-rgb),0));pointer-events:none}
+.cover .wrap{position:relative;z-index:1}
+.corner{display:flex;justify-content:space-between;gap:12px;padding:20px 0 0;font-size:13px;color:var(--muted)}
+.cover-in{padding:36px 0 52px}
+.cover h1{font-size:clamp(34px,9vw,64px);line-height:1.25;font-weight:700;letter-spacing:-.04em;text-wrap:balance;max-width:13em}
+.cover .lead{margin-top:18px;font-size:17px;font-weight:500;color:var(--text-2);max-width:34em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{display:inline-block;background:var(--chip);border-radius:12px;padding:5px 14px;font-size:14px;font-weight:500;white-space:nowrap}
+
+section{padding:52px 0 0}
+h2{font-size:clamp(24px,5.4vw,32px);line-height:1.3;font-weight:700;letter-spacing:-.02em;margin-bottom:20px}
+
+/* 배포형과 세션형: 카드 대신 화면을 흰 면과 accent 면으로 반씩 가른다 */
+.duo{background:linear-gradient(90deg,var(--deploy) 50%,var(--session) 50%)}
+.duo-in{max-width:1160px;margin:0 auto}
+.pair{display:grid;grid-template-columns:1fr 1fr;position:relative}
+.side{padding:30px 14px 26px;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.45}
+.side.d{color:var(--on-deploy);align-items:flex-end;text-align:right;padding-right:16px}
+.side.s{color:var(--on-session);align-items:flex-start;text-align:left;padding-left:16px}
+.pair + .pair .side.d{border-top:1px solid rgba(0,0,0,.14)}
+.pair + .pair .side.s{border-top:1px solid rgba(255,255,255,.32)}
+.side b{font-weight:700}
+.side small{display:block;margin-top:4px;font-size:13px;font-weight:500}
+.side.d small{color:rgba(0,0,0,.6)}
+.side.s small{color:var(--on-session)}
+.seam-q{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);z-index:2;background:var(--bg);color:var(--text);
+  border-radius:40px;padding:6px 14px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.ic{width:44px;height:44px;flex:none}
+.pc{position:relative;display:block}
+.pc img{width:100%;height:100%;display:block}
+.pc .off{filter:grayscale(1) brightness(.62)}
+.pc .z{position:absolute;right:-12px;top:-14px;width:58%;height:58%}
+.head .side{padding-top:34px;padding-bottom:30px;gap:6px}
+.name{font-size:clamp(40px,11vw,112px);line-height:1;font-weight:800;letter-spacing:-.05em}
+.coach{font-size:13px;font-weight:600}
+.side.d .coach{color:rgba(0,0,0,.72)}
+.lead{margin-top:10px;font-size:14.5px;font-weight:500;max-width:22em}
+.head .lead{text-wrap:balance}
+.side small,.intro,.form-side .sub,.decide .small{text-wrap:pretty}
+.decide{padding:28px 0 0;display:grid;gap:12px;justify-items:center;text-align:center}
+.decide .big{font-size:18px;line-height:1.45;font-weight:700}
+.answers{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.a{display:inline-flex;align-items:center;gap:10px;background:var(--box);border-radius:12px;padding:6px 6px 6px 14px;font-weight:600}
+.a b{background:var(--c);color:var(--on);padding:3px 12px;border-radius:8px;font-weight:700}
+.a.d{--c:var(--deploy);--on:var(--on-deploy)}
+.a.s{--c:var(--session);--on:var(--on-session)}
+.decide .small{font-size:14.5px;color:var(--text-2)}
+.decide .pre{font-size:14.5px;color:var(--text-2);margin-bottom:-6px}
+
+/* 미팅 시간표 */
+.note{display:flex;gap:12px;align-items:flex-start;padding:16px 0;margin-bottom:28px;border-top:1px solid var(--glass-b);border-bottom:1px solid var(--glass-b);font-weight:500}
+.note .chip{flex:none;margin-top:1px}
+.chart{padding:0}
+.row + .row{margin-top:20px}
+.row-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.row-head b{font-weight:700;font-size:16px}
+.row-head .tag{font-size:13px;font-weight:500;color:var(--text-2);margin-left:8px}
+.row-head .min{font-weight:700;font-size:16px;white-space:nowrap}
+.strip{display:flex;height:58px}
+.seg{width:calc(var(--m) * 1%);height:100%;border:2px solid var(--bg);border-radius:12px;
+  display:flex;flex-direction:column;justify-content:center;padding:0 8px;overflow:hidden;white-space:nowrap;
+  font-size:13px;line-height:1.25;font-weight:700;transform-origin:left center}
+.seg small{font-size:12px;font-weight:500}
+.seg.d small{opacity:.72}
+.seg.t{background:var(--together);color:var(--text)}
+.seg.d{background:var(--deploy);color:var(--on-deploy)}
+.seg.s{background:var(--session);color:var(--on-session)}
+.seg.w{background:var(--wrap);color:var(--text-2);padding:0;align-items:center;font-size:12px;box-shadow:inset 0 0 0 1px var(--muted)}
+.fork{width:calc(var(--m) * 1%);display:flex;flex-direction:column;transform-origin:left center}
+.fork .seg{width:100%;height:50%;flex-direction:row;align-items:center;gap:5px;font-size:12.5px}
+.axis{position:relative;height:22px;margin-top:12px;border-top:1px solid var(--glass-b)}
+.axis span{position:absolute;top:3px;font-size:12px;color:var(--text-2);transform:translateX(-50%)}
+.axis span:first-child{transform:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px;color:var(--text-2)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;background:var(--c);margin-right:6px;vertical-align:-1px}
+.legend span:last-child i{box-shadow:inset 0 0 0 1px var(--muted)}
+
+.intro{margin:-6px 0 18px;font-size:16.5px;color:var(--text-2);max-width:40em}
+.intro b{color:var(--text);font-weight:700}
+.plans{display:grid;margin-top:44px;border-top:1px solid var(--glass-b)}
+.plan{padding:26px 0 28px;border-bottom:1px solid var(--glass-b)}
+.plan h3{font-size:20px;font-weight:700;letter-spacing:-.02em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.plan h3 .no{display:block;width:100%;font-size:44px;line-height:1;font-weight:800;letter-spacing:-.04em;margin-bottom:6px}
+.plan h3 .min{margin-left:auto;font-size:15px;font-weight:500;color:var(--text-2)}
+.plan p{margin-top:8px;color:var(--text-2)}
+.plan dl{margin-top:14px;display:grid;gap:4px;font-size:15px}
+.plan dt{font-weight:700}
+.plan dd{color:var(--text-2)}
+.plan dd + dt{margin-top:8px}
+
+/* 의견 남기기 */
+.form-side .sub{color:var(--text-2)}
+.recap{display:none}
+.form-box{margin-top:16px;border-radius:20px;overflow:hidden;background:var(--text)}
+/* 설문 실제 길이(10/11 질문 세 개로 줄인 뒤 측정): 폭 320px에서 약 1340px, 720px에서 약 1040px. 바닥의 도움말 아이콘 자리를 두고 폭별로 맞춘다 */
+.form-box iframe{display:block;width:100%;height:1440px;border:0}
+.form-empty{margin-top:16px;padding:44px 18px;text-align:center;color:var(--muted);border:1.5px dashed var(--glass-b);border-radius:20px}
+.open{display:block;margin-top:14px;text-align:center;border:1.5px solid var(--glass-b);border-radius:12px;padding:12px;font-weight:600;text-decoration:none}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+footer{margin-top:60px;padding:28px 0 48px;border-top:1px solid var(--glass-b);font-size:14px;color:var(--muted)}
+footer p + p{margin-top:6px}
+
+/* 좁은 폰에서는 갈라진 칸의 분 표시를 빼고 눈금으로 읽게 한다 */
+@media (max-width:400px){
+  .fork .seg{padding:0 6px}
+  .fork .seg small{display:none}
+  .ic{width:38px;height:38px}
+  .side{font-size:14px}
 }
-/* 도트가 한 칸(22px) 흐르면 원래 자리와 겹치므로 이음매가 보이지 않는다 */
-@keyframes drift{to{background-position:22px 22px}}
-header{background:var(--ink);color:var(--cream);padding:16px var(--pad);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.logo{font-family:var(--disp);font-size:23px;display:flex;align-items:center;gap:9px}
-.logo .dot{width:15px;height:15px;border-radius:50%;background:var(--lemon);box-shadow:0 0 0 3px var(--ink),0 0 0 6px var(--coral)}
-header .who{margin-left:auto;font-size:14px;opacity:.72}
-
-.hero{padding:clamp(44px,7vw,86px) var(--pad) clamp(26px,4vw,44px);position:relative;overflow:hidden}
-.badge{display:inline-block;background:var(--lemon);border:3px solid var(--ink);border-radius:999px;
-  padding:7px 20px;font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.12em;
-  box-shadow:4px 4px 0 var(--ink);transform:rotate(-2.5deg);text-transform:uppercase}
-.hero h1{font-family:var(--disp);font-weight:400;font-size:clamp(30px,5.4vw,62px);line-height:1.24;
-  margin:24px 0 20px;letter-spacing:-.01em;max-width:22ch}
-.hero h1 .hi{display:inline-block;background:var(--coral);color:var(--cream);padding:0 .16em;border-radius:12px;
-  transform:rotate(-1.5deg);box-shadow:4px 4px 0 var(--ink);border:3px solid var(--ink)}
-.hero p{font-size:clamp(17px,1.7vw,20px);max-width:44ch;color:var(--ink-70);font-weight:500}
-.legend{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}
-.blob{position:absolute;border-radius:50%;border:3px solid var(--ink);z-index:-1;will-change:transform}
-.blob.a{width:150px;height:150px;background:var(--mint);right:6%;top:12%;opacity:.85;
-  animation:float1 13s ease-in-out infinite}
-.blob.c{width:54px;height:54px;background:var(--lemon);right:34%;top:24%;animation:float3 16s ease-in-out infinite}
-.blob.b{width:78px;height:78px;background:var(--lav);right:20%;top:56%;
-  animation:float2 9s ease-in-out infinite}
-@keyframes float1{
-  0%,100%{transform:translate(0,0) rotate(0deg) scale(1)}
-  33%{transform:translate(-52px,-64px) rotate(14deg) scale(1.12)}
-  66%{transform:translate(28px,-30px) rotate(-8deg) scale(.94)}
+@media (max-width:350px){ .row-head .tag{display:none} }
+@media (min-width:600px){
+  :root{--pad:32px}
+  .form-box iframe{height:1260px}
 }
-@keyframes float2{
-  0%,100%{transform:translate(0,0) scale(1)}
-  40%{transform:translate(64px,-46px) scale(1.18)}
-  70%{transform:translate(-34px,26px) scale(.9)}
+/* PC: 화면 폭을 다 쓰고, 휴대폰에서 쌓던 칸을 옆으로 나란히 놓는다 */
+@media (min-width:900px){
+  :root{--pad:48px}
+  .corner{padding-top:28px;font-size:14px}
+  .cover-in{padding:64px 0 96px}
+  .cover h1{font-size:64px}
+  .cover-row{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-top:24px}
+  .cover .lead{margin-top:0;font-size:20px}
+  .cover .chips{margin-top:0;flex:none}
+  section{padding-top:80px}
+  h2{margin-bottom:28px}
+  .side{padding:44px 64px 40px;flex-direction:row;align-items:center;gap:22px;font-size:20px}
+  .side.d{flex-direction:row-reverse;justify-content:flex-start;align-items:center;padding-right:72px}
+  .side.s{justify-content:flex-start;align-items:center;padding-left:72px}
+  .side small{font-size:15px}
+  .seam-q{font-size:15px;padding:8px 20px}
+  .ic{width:64px;height:64px}
+  .head .side{flex-direction:column;gap:8px;padding-top:64px;padding-bottom:56px}
+  .head .side.d{align-items:flex-end}
+  .head .side.s{align-items:flex-start}
+  .coach{font-size:15px}
+  .lead{font-size:18px;margin-top:14px}
+  .decide{padding-top:40px}
+  .decide .big{font-size:22px}
+  .note{font-size:17px;padding:16px 22px}
+  .row + .row{margin-top:26px}
+  .row-head b,.row-head .min{font-size:18px}
+  .strip{height:68px}
+  .seg{font-size:15px;padding:0 12px}
+  .seg small{font-size:13px}
+  .seg.w{font-size:13px}
+  .fork .seg{font-size:14px;gap:8px}
+  .axis span{font-size:13px}
+  .legend{font-size:14px}
+  .plans{grid-template-columns:repeat(3,1fr);margin-top:56px}
+  .plan{padding:32px 32px 36px;border-bottom:none}
+  .plan:first-child{padding-left:0}
+  .plan:last-child{padding-right:0}
+  .duo-in{padding:0 var(--pad)}
+  .plan + .plan{border-left:1px solid var(--glass-b)}
+  .plan h3 .no{font-size:56px}
+  .form-sec{display:grid;grid-template-columns:minmax(280px,1fr) minmax(0,720px);gap:48px;align-items:start}
+  .form-side{position:sticky;top:32px}
+  .recap{display:grid;margin-top:28px;list-style:none;border-top:1px solid var(--glass-b)}
+  .recap li{padding:16px 0;border-bottom:1px solid var(--glass-b);display:flex;justify-content:space-between;gap:12px;font-weight:600}
+  .recap li span{color:var(--text-2);font-weight:500;white-space:nowrap}
+  .recap li.other{color:var(--text-2);border-bottom-style:dashed}
+  .intro{font-size:18px;margin:-12px 0 24px}
+  .form-box,.form-empty{margin-top:0}
+  .form-box iframe{height:1120px}
+  footer{margin-top:96px}
 }
-@keyframes float3{
-  0%,100%{transform:translate(0,0) rotate(0deg)}
-  50%{transform:translate(-70px,44px) rotate(-18deg)}
+
+@media (min-width:900px) and (max-width:999px){ .plan h3 .min{flex-basis:100%;margin-left:0} }
+
+/* 시간표 막대가 처음 한 번 왼쪽부터 자란다 */
+@media (prefers-reduced-motion:no-preference){
+  .strip > *{animation:grow .7s cubic-bezier(.2,.7,.2,1) both}
+  .row:nth-of-type(2) .strip > *{animation-delay:.12s}
+  .row:nth-of-type(3) .strip > *{animation-delay:.24s}
+  @keyframes grow{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
 }
-@media(max-width:820px){.blob{display:none}}
 
-.tabwrap{padding:10px var(--pad) 4px;position:sticky;top:0;z-index:30;background:var(--cream);
-  background-image:radial-gradient(var(--cream-2) 2.4px,transparent 2.4px);background-size:22px 22px;
-  border-bottom:3px solid var(--ink);animation:drift 8s linear infinite}
-.tabs{display:flex;gap:12px;overflow-x:auto;padding:12px 2px 16px;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{flex:0 0 auto;cursor:pointer;font-family:var(--sans);font-weight:700;font-size:16px;color:var(--ink);
-  background:#fff;border:3px solid var(--ink);border-radius:16px;padding:11px 18px 11px 13px;
-  display:flex;align-items:center;gap:9px;white-space:nowrap;box-shadow:var(--shadow);
-  transition:transform .12s ease,box-shadow .12s ease,background .12s}
-.tab:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
-.tab:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--ink)}
-.tab[aria-selected="true"]{background:var(--c);transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
-.tab .ico{width:32px;height:32px;border-radius:10px;border:2.5px solid var(--ink);background:var(--c);
-  display:grid;place-items:center;font-size:17px;line-height:1;flex:0 0 auto}
-.tab[aria-selected="true"] .ico{background:#fff}
-.tab .n{font-family:var(--en);font-size:12px;background:var(--ink);color:var(--cream);border-radius:999px;padding:2px 8px}
-
-main{padding:clamp(30px,4.5vw,56px) var(--pad) 100px}
-.listhead{display:flex;align-items:center;gap:14px;margin-bottom:30px;flex-wrap:wrap}
-.listhead h2{font-family:var(--disp);font-weight:400;font-size:clamp(24px,3.4vw,38px)}
-.listhead .pill{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 15px;font-family:var(--en);font-size:12.5px}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:26px}
-.card{background:#fff;border:3px solid var(--ink);border-radius:22px;overflow:hidden;cursor:pointer;
-  text-align:left;font:inherit;color:inherit;padding:0;display:flex;flex-direction:column;
-  box-shadow:var(--shadow);transition:transform .16s ease,box-shadow .16s ease;
-  animation:pop .42s cubic-bezier(.34,1.4,.5,1) backwards}
-.card:hover{transform:translate(-3px,-3px) rotate(-.5deg);box-shadow:var(--shadow-lg)}
-.card:focus-visible{outline:4px solid var(--coral);outline-offset:3px}
-@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
-
-.thumb{position:relative;aspect-ratio:16/10;border-bottom:3px solid var(--ink);background:var(--c);
-  background-image:repeating-linear-gradient(45deg,rgba(0,0,0,.07) 0 12px,transparent 12px 24px);
-  display:flex;align-items:center;justify-content:center;overflow:hidden}
-.thumb .glyph{font-size:64px;line-height:1;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.18))}
-.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.kind{position:absolute;top:10px;left:10px;z-index:2;background:#fff;border:2.5px solid var(--ink);
-  border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:700;box-shadow:2.5px 2.5px 0 var(--ink);
-  white-space:nowrap;max-width:calc(60% - 14px);overflow:hidden;text-overflow:ellipsis}
-.kind.own{background:var(--coral);color:#fff}
-.kind.real{background:var(--mint)}
-.src{position:absolute;bottom:0;left:0;right:0;z-index:2;background:rgba(28,26,22,.86);color:var(--cream);
-  font-size:12.5px;padding:6px 12px;display:flex;gap:7px;align-items:center}
-.src b{font-weight:700}
-.tool{position:absolute;right:12px;top:12px;z-index:2;width:46px;height:46px;
-  display:flex;align-items:center;justify-content:center;pointer-events:none}
-/* 배경판 없이 로고만 — 사진·패턴 위에서도 읽히게 흰 글로우 + 그림자만 얹는다 */
-.tool img{width:100%;height:100%;object-fit:contain;display:block;
-  filter:drop-shadow(0 0 3px rgba(255,255,255,.95)) drop-shadow(0 0 6px rgba(255,255,255,.7))
-         drop-shadow(2px 2px 0 rgba(28,26,22,.28))}
-
-.cbody{padding:20px 22px 22px;display:flex;flex-direction:column;gap:11px;flex:1}
-.cbody h3{font-family:var(--disp);font-weight:400;font-size:23px;line-height:1.4}
-.cbody .sum{color:var(--ink-70);font-size:16.5px;flex:1;font-weight:500}
-.chips{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
-.chip{font-size:13px;font-weight:700;padding:4px 12px;border:2.5px solid var(--ink);border-radius:999px;background:var(--lemon)}
-.chip.w{background:#fff}
-.chip.stale{background:#fff;border-style:dashed}
-.src .dt{font-style:normal;margin-left:auto;opacity:.75;font-size:11.5px}
-.chip.tool-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 12px 3px 5px}
-.chip.tool-chip img{width:22px;height:22px;object-fit:contain;display:block}
-.go{font-family:var(--en);font-size:13px;display:flex;align-items:center;gap:8px;transition:gap .16s}
-.card:hover .go{gap:14px}
-
-dialog{border:4px solid var(--ink);border-radius:26px;padding:0;background:var(--cream);color:var(--ink);
-  width:min(94vw,780px);box-shadow:12px 12px 0 var(--ink);overflow:hidden;
-  margin:auto;max-height:90vh;display:block}
-dialog:not([open]){display:none}
-dialog::backdrop{background:rgba(28,26,22,.55)}
-dialog[open]{animation:dpop .34s cubic-bezier(.34,1.35,.5,1)}
-@keyframes dpop{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
-.d-hero{position:relative;aspect-ratio:21/8;border-bottom:4px solid var(--ink);background:var(--c);
-  background-image:repeating-linear-gradient(45deg,rgba(0,0,0,.07) 0 14px,transparent 14px 28px);
-  display:flex;align-items:center;justify-content:center;overflow:hidden}
-.d-hero .glyph{font-size:76px;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.18))}
-.d-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.d-close{position:absolute;top:14px;right:14px;z-index:3;width:44px;height:44px;border:3px solid var(--ink);
-  background:#fff;border-radius:50%;cursor:pointer;font-size:21px;line-height:1;box-shadow:3px 3px 0 var(--ink)}
-.d-close:hover{background:var(--coral);color:#fff}
-.d-top{padding:22px clamp(20px,4vw,44px) 18px}
-.d-top h2{font-family:var(--disp);font-weight:400;font-size:clamp(25px,3.6vw,36px);line-height:1.32;margin:10px 0 0}
-.d-body{padding:8px clamp(20px,4vw,44px) 40px;display:flex;flex-direction:column;gap:26px;max-height:54vh;overflow:auto}
-.sec h4{font-family:var(--en);font-size:12.5px;background:var(--lemon);border:2.5px solid var(--ink);
-  border-radius:999px;padding:3px 13px;display:inline-block;margin-bottom:12px;box-shadow:2.5px 2.5px 0 var(--ink)}
-.sec p{font-size:17px;font-weight:500}
-.sec ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.sec li{padding-left:26px;position:relative;font-size:17px;font-weight:500}
-.sec li::before{content:"✦";position:absolute;left:0;top:0;color:var(--coral);font-size:15px}
-.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.flow div{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:14px 12px;box-shadow:3px 3px 0 var(--ink)}
-.flow b{display:block;font-family:var(--en);font-size:10.5px;margin-bottom:7px;color:var(--ink-70)}
-.flow span{font-size:15.5px;line-height:1.5;font-weight:500}
-.sec .lead{font-size:18.5px;font-weight:700;line-height:1.6}
-.sec .hint{font-size:15px;color:var(--ink-70);font-weight:500;margin-bottom:10px}
-.links a .tn.plain{display:flex;align-items:center;justify-content:center;background:none;border:0}
-.links a .tn.plain img{width:40px;height:40px;object-fit:contain;display:block}
-.note.first{background:var(--lemon)}
-.note.warn{background:#fff;border-style:dashed}
-.note.srcnote{margin-bottom:10px;font-size:16px}
-.sec ol.steps{list-style:none;counter-reset:st;display:flex;flex-direction:column;gap:8px}
-.sec ol.steps li{counter-increment:st;padding-left:38px;position:relative;font-size:16.5px;font-weight:500}
-.sec ol.steps li::before{content:counter(st);position:absolute;left:0;top:1px;width:26px;height:26px;
-  background:var(--ink);color:var(--cream);border-radius:50%;display:grid;place-items:center;
-  font-family:var(--en);font-size:12.5px}
-.sec ul.nums li::before{content:"✔";color:var(--mint)}
-blockquote.q{background:var(--cream-2);border:3px solid var(--ink);border-left-width:9px;border-radius:14px;
-  padding:13px 16px;margin:0 0 9px;font-size:16.5px;font-weight:500;box-shadow:3px 3px 0 var(--ink)}
-.note{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:14px 16px;box-shadow:3px 3px 0 var(--ink);font-weight:500}
-.links{display:flex;flex-direction:column;gap:10px}
-.links a{display:flex;align-items:center;gap:12px;background:#fff;border:3px solid var(--ink);border-radius:16px;
-  padding:10px 14px;text-decoration:none;color:var(--ink);font-weight:700;font-size:16px;
-  box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s}
-.links a:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);background:var(--lemon)}
-.links a .tn{width:76px;height:48px;flex:0 0 auto;border:2.5px solid var(--ink);border-radius:9px;object-fit:cover;background:var(--cream-2)}
-.links a .tx{display:flex;flex-direction:column;gap:2px;min-width:0}
-.links a .tx span{font-size:12.5px;font-weight:500;color:var(--ink-70);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.links a .role{font-family:var(--en);font-size:10.5px;background:var(--ink);color:var(--cream);border-radius:999px;padding:2px 9px;margin-left:auto;flex:0 0 auto}
-@media(max-width:640px){.flow{grid-template-columns:1fr 1fr}.links a .role{display:none}}
-
-@media (prefers-reduced-motion:reduce){
-  body,.tabwrap,.blob{animation:none!important}
-  .card,dialog{animation-duration:.01ms!important}
-}
-.watch{margin-top:clamp(56px,8vw,104px);border-top:3px dashed var(--ink);padding-top:clamp(32px,4vw,52px)}
-.wtop h2{font-family:var(--disp);font-weight:400;font-size:clamp(24px,3.4vw,36px);margin-bottom:10px}
-.wtop p{color:var(--ink-70);font-weight:500;max-width:56ch;margin-bottom:34px}
-.wgroup{margin-bottom:38px}
-.wgroup h3{display:inline-block;font-family:var(--sans);font-weight:700;font-size:16.5px;
-  background:var(--lemon);border:3px solid var(--ink);border-radius:999px;padding:6px 16px;
-  box-shadow:3px 3px 0 var(--ink);margin-bottom:20px}
-.wlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
-.wcard{display:flex;flex-direction:column;background:#fff;border:3px solid var(--ink);border-radius:20px;
-  overflow:hidden;text-decoration:none;color:inherit;box-shadow:var(--shadow);
-  transition:transform .16s ease,box-shadow .16s ease}
-.wcard:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow-lg)}
-.wcard:focus-visible{outline:4px solid var(--coral);outline-offset:3px}
-.wthumb{position:relative;aspect-ratio:16/9;border-bottom:3px solid var(--ink);background:var(--cream-2);overflow:hidden}
-.wthumb img{width:100%;height:100%;object-fit:cover;display:block}
-.wdur{position:absolute;right:9px;bottom:9px;background:var(--ink);color:var(--cream);
-  border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:700}
-.wdur.long{background:var(--coral);border:2px solid var(--ink)}
-.wbody{padding:16px 18px 18px;display:flex;flex-direction:column;gap:9px;flex:1}
-.wbody h4{font-size:17px;font-weight:700;line-height:1.45}
-.wmeta{font-size:13px;color:var(--ink-70);font-weight:500}
-.wwhy{font-size:15.5px;color:var(--ink);font-weight:500;flex:1}
-.wnote{font-size:13px;font-weight:700;border:2.5px solid var(--ink);border-radius:999px;
-  padding:3px 11px;background:#fff;align-self:flex-start}
-@media(max-width:640px){.wlist{grid-template-columns:1fr}}
-footer{border-top:3px solid var(--ink);background:var(--ink);color:var(--cream);padding:28px var(--pad) 52px;
-  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:14.5px}
-footer .stamp{font-family:var(--en);font-size:11.5px;opacity:.6}
+/* 은은한 분홍 번짐(Owner 선택 10/10): accent 투명도 변형만 써서 DS의 유채색 1개 원칙을 지킨다 */
+/* 막대 사이 틈을 바탕색 대신 투명으로 둬서 번진 색이 비치게 */
+.seg{border-color:transparent;background-clip:padding-box}
+body{background:
+  radial-gradient(60vw 40vw at 100% 44%,rgba(var(--accent-rgb),.11),transparent 70%),
+  radial-gradient(50vw 36vw at 0% 68%,rgba(var(--accent-rgb),.08),transparent 70%),
+  radial-gradient(60vw 40vw at 100% 97%,rgba(var(--accent-rgb),.10),transparent 70%),
+  var(--bg)}
+.duo{background:linear-gradient(90deg,var(--deploy) 50%,transparent 50%),linear-gradient(180deg,var(--accent) 0%,var(--accent) 35%,var(--accent-shade) 100%)}
+.note .chip{background:rgba(var(--accent-rgb),.22)}
+.plan h3 .no{background:linear-gradient(180deg,#FFFFFF 35%,rgba(var(--accent-rgb),.9));-webkit-background-clip:text;background-clip:text;color:transparent}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo"><span class="dot"></span>자동화 소재</div>
-  <div class="who">세인투 실행조 시즌2 · 자동화 트랙</div>
+<header class="cover">
+  <div class="wrap">
+    <div class="corner"><span>자동화 트랙 W6, W7</span><span>세인투 실행조 시즌2</span></div>
+    <div class="cover-in">
+      <h1>6, 7주차 정기 Zoom 미팅 운영 방식</h1>
+      <div class="cover-row">
+        <p class="lead">5주차(10/6)에는 배포형과 세션형 교육을 한 방에서 차례로 진행했어요. 6, 7주차는 크루님들 의견을 듣고 정하려고 해요.</p>
+        <div class="chips"><span class="chip">설문 1분</span><span class="chip">마감 10/12(월) 밤 12시</span></div>
+      </div>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-  <span class="blob a"></span><span class="blob b"></span><span class="blob c"></span>
-  <span class="badge">Automation Sourcebook</span>
-  <h1>세인투 실행조 시즌2<br>자동화 트랙 <span class="hi">사례 조사</span></h1>
-  <p>직업별로 모아 둔 자동화 사례집입니다. 무엇을 만들지는 직접 정하시고, 여기서는 감각만 얻어 가시면 됩니다.</p>
-  <div class="legend">
-    <span class="chip w">⭐ 낙관 사례 — 제가 실제로 돌리는 것</span>
-    <span class="chip w">📺 실사례 — 남이 만든 것, 출처 있음</span>
-    <span class="chip w">💡 응용 아이디어 — 아직 사례는 못 찾음</span>
+<main>
+
+<section class="duo-sec" aria-labelledby="h-tracks">
+  <div class="wrap"><h2 id="h-tracks">배포형과 세션형</h2></div>
+  <div class="duo">
+    <div class="duo-in">
+      <div class="pair head">
+        <div class="side d"><h3 class="name">배포형</h3><p class="coach">담당 RomanSun</p><p class="lead">한 번 만들어 GitHub에 올려 두면 그다음은 알아서 돌아요.</p></div>
+        <div class="side s"><h3 class="name">세션형</h3><p class="coach">담당 낙관</p><p class="lead">매번 하던 설명(역할과 절차)을 파일에 적어 두면, 부를 때 따로 지시하지 않아도 에이전트가 끝까지 처리해요.</p></div>
+      </div>
+      <div class="pair">
+        <span class="seam-q">언제 시작해요?</span>
+        <div class="side d"><img width="64" height="64" loading="lazy" decoding="async" class="ic" src="assets/alarm_clock_3d.png" alt=""><p><span class="sr">배포형: </span><b>정해진 시각에 저절로</b></p></div>
+        <div class="side s"><img width="64" height="64" loading="lazy" decoding="async" class="ic" src="assets/speech_balloon_3d.png" alt=""><p><span class="sr">세션형: </span><b>내가 부를 때</b></p></div>
+      </div>
+      <div class="pair">
+        <span class="seam-q">내 컴퓨터는요?</span>
+        <div class="side d"><span class="pc ic"><img width="64" height="64" loading="lazy" decoding="async" class="off" src="assets/desktop_computer_3d.png" alt=""><img width="64" height="64" loading="lazy" decoding="async" class="z" src="assets/zzz_3d.png" alt=""></span><p><span class="sr">배포형: </span><b>꺼져 있어도</b> 돼요</p></div>
+        <div class="side s"><span class="pc ic"><img width="64" height="64" loading="lazy" decoding="async" src="assets/desktop_computer_3d.png" alt=""></span><p><span class="sr">세션형: </span><b>켜져 있어야</b> 해요</p></div>
+      </div>
+      <div class="pair">
+        <span class="seam-q">재료는요?</span>
+        <div class="side d"><img width="64" height="64" loading="lazy" decoding="async" class="ic" src="assets/newspaper_3d.png" alt=""><p><span class="sr">배포형: </span><b>매번 같은 곳에서</b> 가져와요<small>매일 그 사이트 뉴스, 그&nbsp;환율처럼</small></p></div>
+        <div class="side s"><img width="64" height="64" loading="lazy" decoding="async" class="ic" src="assets/robot_3d.png" alt=""><p><span class="sr">세션형: </span>내가 <b>매번 다른 것</b>을 맡겨요<small>이번 회의록, 이번 문의처럼</small></p></div>
+      </div>
+      <div class="pair">
+        <span class="seam-q">결과는 어디로 와요?</span>
+        <div class="side d"><img width="64" height="64" loading="lazy" decoding="async" class="ic" src="assets/mobile_phone_3d.png" alt=""><p><span class="sr">배포형: </span><b>카톡으로</b> 도착</p></div>
+        <div class="side s"><img width="64" height="64" loading="lazy" decoding="async" class="ic" src="assets/memo_3d.png" alt=""><p><span class="sr">세션형: </span><b>노션 등으로</b> 도착</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="decide">
+      <p class="pre">헷갈릴 때는 이 질문 하나로 가려요.</p>
+      <p class="big">결과가 나오려면 도구를 켜야 하나요?</p>
+      <div class="answers"><span class="a d">아니요<b>배포형</b></span><span class="a s">예<b>세션형</b></span></div>
+      <p class="small">설문 첫 질문에서 내 트랙을 골라요. 아직 못 정하셨다면 "아직 못 정했어요"도 있어요.</p>
+    </div>
   </div>
 </section>
 
-<div class="tabwrap"><div class="tabs" role="tablist" id="tabs"></div></div>
+<div class="wrap">
+<section aria-labelledby="h-plans">
+  <h2 id="h-plans">운영 방식 후보</h2>
+  <p class="intro">운영진이 먼저 생각해 본 안 세 가지예요. 이&nbsp;중에서 <b>꼭 고르지 않아도 돼요.</b> 더 좋은 방법이 떠오르면 설문에 편하게 적어 주세요.</p>
+  <div class="note"><span class="chip">공통</span><p>어느 안이든 처음 30분(출석과 공지, 지난주 한 일 리뷰, 근황 토크)과 마지막 안내 10분은 다 같이 해요. 달라지는 건 그 사이 교육 시간뿐이에요.</p></div>
 
-<main>
-  <div class="listhead"><h2 id="listTitle"></h2><span class="pill" id="listCount"></span></div>
-  <div class="grid" id="grid"></div>
-
-  <section class="watch">
-    <div class="wtop">
-      <h2>👀 낙관이 보고 있는 것</h2>
-      <p>직업별 사례는 아닙니다. 제가 보면서 도움이 됐던 것들을 모아 뒀습니다.
-         눌러 보시고 필요 없으면 그냥 지나가셔도 됩니다.</p>
+  <div class="chart">
+    <div class="row">
+      <div class="row-head"><b>1안 나눠서 듣기</b><span class="min">약 70분</span></div>
+      <div class="strip" role="img" aria-label="1안: 다 같이 30분, 배포형 방과 세션형 방으로 나뉘어 동시에 30분, 마무리 안내 10분">
+        <div class="seg t" style="--m:30">다 같이<small>30분</small></div>
+        <div class="fork" style="--m:30">
+          <div class="seg d">배포형 방<small>30분</small></div>
+          <div class="seg s">세션형 방<small>30분</small></div>
+        </div>
+        <div class="seg w" style="--m:10">안내</div>
+      </div>
     </div>
-    <div id="watch"></div>
-  </section>
-</main>
+    <div class="row">
+      <div class="row-head"><b>2안 다 같이 차례로 듣기<span class="tag">5주차 방식</span></b><span class="min">약 100분</span></div>
+      <div class="strip" role="img" aria-label="2안: 다 같이 30분, 배포형 교육 30분, 세션형 교육 30분, 마무리 안내 10분">
+        <div class="seg t" style="--m:30">다 같이<small>30분</small></div>
+        <div class="seg d" style="--m:30">배포형<small>30분</small></div>
+        <div class="seg s" style="--m:30">세션형<small>30분</small></div>
+        <div class="seg w" style="--m:10">안내</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row-head"><b>3안 다 같이 핵심만 듣기</b><span class="min">약 80분</span></div>
+      <div class="strip" role="img" aria-label="3안: 다 같이 30분, 배포형 핵심 20분, 세션형 핵심 20분, 마무리 안내 10분">
+        <div class="seg t" style="--m:30">다 같이<small>30분</small></div>
+        <div class="seg d" style="--m:20">배포형<small>20분</small></div>
+        <div class="seg s" style="--m:20">세션형<small>20분</small></div>
+        <div class="seg w" style="--m:10">안내</div>
+      </div>
+    </div>
+    <div class="axis" aria-hidden="true">
+      <span style="left:0">0</span><span style="left:30%">30분</span><span style="left:60%">60분</span><span style="left:90%">90분</span>
+    </div>
+    <div class="legend" aria-hidden="true">
+      <span><i style="--c:var(--together)"></i>다 같이</span>
+      <span><i style="--c:var(--deploy)"></i>배포형 교육</span>
+      <span><i style="--c:var(--session)"></i>세션형 교육</span>
+      <span><i style="--c:var(--wrap)"></i>마무리 안내</span>
+    </div>
+  </div>
+
+  <div class="plans">
+    <div class="plan">
+      <h3><span class="no">1안</span>나눠서 듣기<span class="min">약 70분</span></h3>
+      <p>교육 시간에 Zoom 소회의실 두 곳으로 나뉘어 트랙별 교육이 동시에 진행돼요. 끝나면 다시 한 방에 모여요.</p>
+      <dl><dt>좋은 점</dt><dd>미팅이 가장 짧고, 내 트랙 이야기에 집중할 수 있어요.</dd>
+          <dt>알아둘 점</dt><dd>다른 트랙 교육은 들을 수 없어요. 소회의실로 옮겨 갔다가 돌아오는 과정이 있어요.</dd></dl>
+    </div>
+    <div class="plan">
+      <h3><span class="no">2안</span>다 같이 차례로 듣기<span class="min">약 100분</span></h3>
+      <p>5주차처럼 한 방에서 배포형 교육과 세션형 교육을 차례로 들어요.</p>
+      <dl><dt>좋은 점</dt><dd>다른 트랙 이야기도 함께 들을 수 있어요.</dd>
+          <dt>알아둘 점</dt><dd>미팅이 가장 길어요.</dd></dl>
+    </div>
+    <div class="plan">
+      <h3><span class="no">3안</span>다 같이 핵심만 듣기<span class="min">약 80분</span></h3>
+      <p>한 방에서 트랙별 핵심만 20분씩 듣고, 실제 화면 시연은 자료로 대신해요.</p>
+      <dl><dt>좋은 점</dt><dd>두 트랙을 다 들으면서도 5주차보다 짧아요.</dd>
+          <dt>알아둘 점</dt><dd>미팅 중에 실제 화면 시연을 보며 따라 하기는 어려워요.</dd></dl>
+    </div>
+  </div>
+</section>
+
+<section id="form" class="form-sec" aria-labelledby="h-form">
+  <div class="form-side">
+    <h2 id="h-form">의견 남기기</h2>
+    <p class="sub">질문 세 개예요.</p>
+    <ul class="recap" aria-label="운영 방식 후보 다시 보기">
+      <li>1안 나눠서 듣기<span>약 70분</span></li>
+      <li>2안 다 같이 차례로 듣기<span>약 100분</span></li>
+      <li>3안 다 같이 핵심만 듣기<span>약 80분</span></li>
+      <li class="other">다른 방법 제안<span>직접 적기</span></li>
+    </ul>
+  </div>
+  <div class="form-main">
+    <div class="form-box"><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSejIgnFz7AJjL_2LSp1c6lDVpw8WXyJ0JrjhE2S3R9yx7aOmQ/viewform?embedded=true" title="6, 7주차 정기 Zoom 미팅 운영 방식 설문" loading="lazy">불러오는 중이에요.</iframe></div>
+    <a class="open" href="https://docs.google.com/forms/d/e/1FAIpQLSejIgnFz7AJjL_2LSp1c6lDVpw8WXyJ0JrjhE2S3R9yx7aOmQ/viewform" target="_blank" rel="noopener">설문이 안 보이면 새 창에서 열기</a>
+  </div>
+</section>
 
 <footer>
-  <div>트랙코치 낙관 · 사례는 계속 추가됩니다</div>
-  <div class="stamp">MOCKUP V3 — 2026.09.09</div>
+  <p>의견을 모아 운영진이 6, 7주차 방식을 정하고 오픈톡방으로 알려 드릴게요.</p>
+  <p>세인투 실행조 시즌2 자동화 트랙 운영진</p>
+  <p>아이콘: Microsoft Fluent Emoji (MIT 라이선스)</p>
 </footer>
+</div>
 
-<dialog id="dlg">
-  <div class="d-hero" id="dHero">
-    <span class="glyph" id="dGlyph"></span>
-    <img id="dImg" alt="" hidden>
-    <button class="d-close" id="dlgClose" aria-label="닫기">&times;</button>
-  </div>
-  <div class="d-top"><div class="chips" id="dMeta"></div><h2 id="dTitle"></h2></div>
-  <div class="d-body" id="dBody"></div>
-</dialog>
-
-<script>
-/* 자료는 6개월이 지나면 그대로 따라 해도 안 될 수 있다.
-   오늘 날짜로 계산하므로 손대지 않아도 시간이 지나면 알아서 경고가 뜬다. */
-var STALE_MONTHS = 6;
-function isStale(d){
-  if (!d) return false;
-  var cut = new Date();
-  cut.setMonth(cut.getMonth() - STALE_MONTHS);
-  return new Date(d + "T00:00:00") < cut;
-}
-function hasStale(it){
-  return (it.refs || []).some(function(r){ return isStale(r.d); });
-}
-
-var F = ["① 무엇이 시작하나","② 모은다","③ 고른다·바꾼다","④ 내보낸다"];
-var KIND = {own:["⭐ 낙관 사례","own"], real:["📺 실사례","real"], idea:["💡 응용 아이디어",""]};
-
-/* 도구 마크 — 임시. 배포 전 공식 에셋·브랜드 가이드 확인 필요 */
-var TOOL = {
-  "클로드코드":'<img src="assets/claudecode.png" alt="">',
-  "코덱스":'<img src="assets/codex.png" alt="">',
-  "클로드":'<img src="assets/claudecode.png" alt="">'
-};
-var DOC = {"클로드코드":"https://docs.anthropic.com/en/docs/claude-code","코덱스":"https://openai.com/codex/","클로드":"https://claude.ai/"};
-
-/* 실제 확인된 자료 — og:image·썸네일 응답 확인 2026-09-09 */
-var R = {
-  ytInstall:{t:"클로드 코드 설치부터 첫 실행까지 — 코딩 몰라도 OK (왕초보 편)", p:"쉽게 AI 알려주는 개발자 · YouTube", role:"출처", d:"2026-07-11",
-    u:"https://www.youtube.com/watch?v=S91uwu4LlFU",
-    th:"https://img.youtube.com/vi/S91uwu4LlFU/hqdefault.jpg"},
-  ytCodex:{t:"Codex 2026 기초 가이드 — 핵심 기능 설명, 실습까지", p:"이동훈의 루트AI · YouTube", role:"출처", d:"2026-06-05",
-    u:"https://www.youtube.com/watch?v=iupJvraoVow",
-    th:"https://img.youtube.com/vi/iupJvraoVow/hqdefault.jpg"},
-  ytExcel:{t:"앞으로 엑셀 직접 만들지 마세요! 클로드 하나로 자동화 하는 법", p:"AI 콘텐츠 마스터 세인투 · YouTube", role:"출처 · 클로드 엑셀 확장", d:"2026-06-18",
-    u:"https://www.youtube.com/watch?v=DBk8H8RbNpU",
-    th:"https://img.youtube.com/vi/DBk8H8RbNpU/hqdefault.jpg"},
-  ytSalon:{t:"미용실 재방문율을 높이는 가장 쉬운 방법 — 구글 시트 고객 관리 자동화", p:"심플리Do · YouTube", role:"출처 · 앱스 스크립트 사례", d:"2026-04-28",
-    u:"https://www.youtube.com/watch?v=dqxKmnwBBC0",
-    th:"https://img.youtube.com/vi/dqxKmnwBBC0/hqdefault.jpg"},
-  ytBrief:{t:"학원 업무 자동화 클로드로 5분컷! 컴퓨터 꺼놔도 매일 아침 7시 입시 브리핑 도착시키는 법", p:"공감에듀테크 · YouTube", role:"출처", d:"2026-07-30",
-    u:"https://www.youtube.com/watch?v=BkyIuCua_58",
-    th:"https://img.youtube.com/vi/BkyIuCua_58/hqdefault.jpg"},
-  ytSms:{t:"[AI자동화학교 20강] 예약문자, 아직도 손으로 보내세요? 구글시트 맞춤형 예약 문자 자동 발송 시스템 만들기", p:"조현정의AI실험실 · YouTube", role:"출처 · 앱스 스크립트 사례", d:"2026-04-15",
-    u:"https://www.youtube.com/watch?v=i4ucoa7l1Fs",
-    th:"https://img.youtube.com/vi/i4ucoa7l1Fs/hqdefault.jpg"},
-  ytOrder:{t:"[AI 발주 자동화] 딸칵 한번에 26개 공급사로 자동 발주!", p:"장사는AI빨 · YouTube", role:"관련 영상", d:"2026-06-19",
-    u:"https://www.youtube.com/watch?v=fYNTEGNbcx0",
-    th:"https://img.youtube.com/vi/fYNTEGNbcx0/hqdefault.jpg"},
-  picks:{t:"클로드 코드로 뭐부터 자동화할까 — 실무자 4명이 고른 업무", p:"지피터스", role:"출처", d:"2026-08-18",
-    u:"https://www.gpters.org/news/post/claude-code-automation-picks-V17sdSmztTgL1q8",
-    th:"https://tribe-s3-production.imgix.net/ERbXw4Ebvbm08JHJL5S2b?fit=max&w=1000&auto=compress,format"},
-  interview:{t:"클로드코드 스킬로 업무 자동화 인터뷰 해 보기", p:"지피터스", role:"출처", d:"2026-03-19",
-    u:"https://www.gpters.org/nocode/post/interview-business-automation-Lit7tHS8ivSSnvY",
-    th:"https://tribe-s3-production.imgix.net/pnfvBIDjYr2STfqVZRMV3?fit=max&w=1000&auto=compress,format"},
-  vod:{t:"AI로 VOD 스크립트와 강의 발표자료 만든 후기", p:"지피터스", role:"출처", d:"2026-03-22",
-    u:"https://www.gpters.org/nocode/post/review-creating-vod-scripts-pKLSZb5YiM72RsZ",
-    th:"https://tribe-s3-production.imgix.net/Rb7bPSKFCmGazzcAfQuAj?fit=max&w=1000&auto=compress,format"},
-  baby:{t:"클로드코드 걸음마 — 엑셀 함수 몰라도 괜찮다고요?", p:"지피터스", role:"출처", d:"2026-03-22",
-    u:"https://www.gpters.org/llm-service/post/claude-code-baby-okay-vllPC4PSKy5R9Cp", th:""},
-  vault:{t:"클로드 코드로 기존 업무자료를 옵시디언에 차근차근 정리하기", p:"지피터스", role:"출처", d:"2026-03-31",
-    u:"https://www.gpters.org/nocode/post/organize-existing-work-data-ES7WtVv08hsv7ce", th:""},
-  noshow:{t:"노쇼율 낮춘 병원들의 공통점 — 다단계 리마인드 구조", p:"세이프닥", role:"관련 글", d:"2026-07-08",
-    u:"https://safedoc.io/blog/no-show-rate-lowering-hospital-strategies",
-    th:"https://image.inblog.dev/?url=https%3A%2F%2Fsource.inblog.dev%2Ffeatured_image%2F2026-06-29T06%3A41%3A31.037Z-5fbed66c-9a88-40ac-9868-d2be04d53856&w=1200&q=85&format=jpg&v=2026-06-29T06%3A41%3A32.073Z"},
-  ytsum:{t:"유튜브 요약 자동화 5단계 — 새 영상을 AI가 노션에 자동 정리", p:"HowtoAI", role:"관련 글", d:"2026-06-11",
-    u:"https://www.how-toai.com/blog/youtube-summary-automation-notion-5-steps-2026",
-    th:"https://www.how-toai.com/images/posts/youtube-summary-automation-notion-5-steps-2026-thumb.webp"}
-};
-
-var DATA = [
- {t:"부동산·중개", ico:"🏠", c:"var(--coral)", items:[
-  {k:"real", g:"📨", h:"명단 800명에게 문자 한 번에", s:"종이로 관리하던 소유자 800명 명단을 정리하고 공지 문자를 한 번에 보내는 것을 첫 자동화로 골랐습니다.", tool:"클로드코드",
-   pain:"재개발 구역 소유자 800명의 정보를 종이로 관리하고, 공지 문자는 한 명씩 개별로 보냈습니다.",
-   flow:["공지할 일이 생기면","명단을 읽어 옴","보낼 대상을 고름","문자를 한 번에 발송"],
-   numbers:["대상 <b>800명</b>","기존 관리 방식은 <b>종이</b>","고른 자동화 두 가지 — 문자 일괄 발송, 소유자 정보 수정"],
-   prompts:["엑셀 함수를 몰라도 <b>말로 요청하면 된다</b> — 저자가 스터디에서 얻은 핵심 깨달음"],
-   pitfall:"첫 스터디에서는 사전과제가 준비되지 않고 <b>컴퓨터 사양이 부족해</b> 실습을 못 하고 화면만 봤습니다. 저자 표현은 「컴퓨터 사양이 후져서 진행이 안되었네요」입니다. 이후 오프라인 모임에서 새 노트북을 들고 옆자리 도움을 받아 「겨우겨우」 세팅을 마쳤습니다.",
-   need:["명단 자료 (종이에 있으면 먼저 파일로 옮기기)","문자 발송 수단","클로드코드가 원활히 돌아가는 노트북"],
-   hard:"이 사례의 진짜 관문은 자동화가 아니라 <b>컴퓨터 사양과 첫 세팅</b>이었습니다. 우리 트랙이 W0 미션을 설치로 잡은 이유가 여기 있습니다.",
-   first:"명단이 종이에 있다면, 우선 열 이름만 정해 파일 하나로 옮겨 보십시오.",
-   srcNote:"⚠️ 자동화 <b>제작은 아직 예정 단계</b>입니다(워크샵에서 만들 계획). 지금 확인되는 것은 「무엇을 고를지」와 「세팅에서 겪은 문제」입니다.",
-   refs:[R.baby]},
-  {k:"idea", g:"📅", h:"계약 만기 미리 알림", s:"만기 30일 전과 7일 전에 대상자 목록과 연락 문구 초안을 만들어 둡니다.", tool:"코덱스",
-   pain:"만기는 대부분 기억으로 관리됩니다. 한 건 놓치면 그대로 매출입니다.",
-   flow:["매일 아침","계약 목록을 읽음","날짜를 계산해 대상만 추림","목록과 문구 초안을 전달"],
-   need:["계약일과 만기일이 들어 있는 목록"],
-   hard:"날짜 형식이 섞여 있으면 처음 한 번 정리가 필요합니다.",
-   first:"계약 목록에 만기일 칸이 있는지부터 확인해 보십시오.", refs:[]}]},
-
- {t:"보험·금융·영업", ico:"🤝", c:"var(--lemon)", items:[
-  {k:"real", g:"📊", h:"팀 실적을 매일 자동 집계", s:"팀원 PC에 흩어진 숫자를 매일 손으로 모으던 집계를 자동으로 쌓고, 다음 행동 초안까지 받습니다.", tool:"클로드코드",
-   pain:"팀원 각자의 PC에 실적 숫자가 흩어져 있어 매일 손으로 모았습니다. 모으는 데 시간을 쓰고 해석에는 쓰지 못합니다.",
-   flow:["정한 시각","팀원별 실적 자료를 모음","집계하고 변화를 짚음","팀 공용 공간에 쌓고 액션 초안까지"],
-   numbers:["결과를 두는 곳이 <b>이미 매일 여는 곳</b>이어야 한다 — 다른 곳에 두면 2주쯤 뒤에 잊힌다","자동 집계 후 팀 공용 공간에 축적, AI가 액션 초안도 생성"],
-   pitfall:"같은 글은 대상이 크면 완성 뒤에 생기는 수정을 감당하지 못한다고 경고합니다. 「우리 팀 전체 워크플로 개선」 같은 대상은 4명 중 아무도 고르지 않았습니다.",
-   need:["팀원들이 실적을 적는 자리","결과를 쌓을 팀 공용 공간"],
-   hard:"남의 손을 거쳐야 하는 자료라면 대상에서 빼는 편이 낫습니다. 이 사례가 성립한 건 집계가 <b>한 사람 안에서 닫혔기</b> 때문입니다.",
-   first:"이번 주 실적을 몇 군데에서 모았는지 그 개수만 세어 보십시오.",
-   srcNote:"같은 글의 <b>영업·유통 담당자 사례</b>입니다. 구현 상세는 공개되지 않았고, 무엇을 골랐고 어떤 형태가 됐는지까지 확인됩니다.",
-   refs:[R.picks]},
-  {k:"idea", g:"🎁", h:"고객 기념일 알림과 인사 초안", s:"생일과 계약 기념일을 미리 알려 주고, 사람마다 다른 인사 문구를 초안으로 뽑습니다.", tool:"클로드코드",
-   pain:"인사는 마음이 아니라 타이밍입니다. 지나고 나서 알면 차라리 안 보내는 편이 낫습니다.",
-   flow:["매일 아침","고객 목록을 읽음","오늘과 이번 주 대상을 추림","이름별 문구 초안"],
-   need:["이름과 날짜가 들어 있는 고객 목록"],
-   hard:"문구가 기계처럼 나오면 결국 안 쓰게 됩니다. 톤을 몇 번 다듬어야 합니다. 그리고 고객 정보를 외부로 내보내지 않는 구조로 짜야 합니다 — 이 업권은 특히 그렇습니다.",
-   first:"평소 보내는 인사 문구 세 개를 그대로 적어 두십시오. 그게 톤의 기준이 됩니다.", refs:[]},
-  {k:"idea", g:"📈", h:"주간 실적 보고 초안", s:"흩어진 숫자를 모아 보고서 초안까지 만들어 둡니다. 확인만 하고 보냅니다.", tool:"코덱스",
-   pain:"숫자를 옮겨 적는 데 시간을 쓰고, 정작 해석에는 시간이 남지 않습니다.",
-   flow:["금요일 오후","실적 자료를 모음","증감과 특이점을 계산","보고서 초안"],
-   need:["매주 쓰는 보고 양식 한 개"],
-   hard:"양식이 매번 바뀌면 효과가 줄어듭니다.",
-   first:"지난주 보고서 하나를 그대로 남겨 두십시오. 양식은 그걸로 씁니다.", refs:[]}]},
-
- {t:"학원·교육·강의", ico:"📚", c:"var(--mint)", items:[
-  {k:"real", g:"📰", h:"매일 아침 7시 업계 뉴스 브리핑", s:"컴퓨터를 꺼놔도 매일 아침 정해진 시각에 업계 소식 요약이 카톡으로 도착합니다.", tool:"클로드코드",
-   pain:"챙길 정보는 많은데 매일 찾아볼 시간이 없습니다. 영상은 이를 「아침은 정보 과부하」라고 표현합니다.",
-   flow:["매일 아침 7시","뉴스를 찾아 읽어 옴","쉬운 말로 세 개만 고름","카톡으로 짧은 요약, 노션에 전체 정리"],
-   steps:["도구를 연결한다 — 검색·카톡·노션을 각각 꽂는다",
-          "권한을 전부 허용한다 (세팅은 <b>딱 한 번</b>)",
-          "무엇을 어떻게 보낼지 한 줄로 지시한다",
-          "키워드만 내 업종에 맞게 바꾼다",
-          "매일 아침 실행을 예약한다"],
-   numbers:["실행 — 매일 오전 <b>7시</b>",
-            "<b>컴퓨터를 꺼놔도 도착한다</b> — 내 PC가 아니라 서버에서 돌기 때문",
-            "카톡에는 <b>짧은 요약</b>, 노션에는 링크까지 담긴 <b>전체 정리본</b>으로 나눠 저장",
-            "세팅은 한 번, 이후는 손댈 일이 없다"],
-   prompts:["\"입시 소식을 쉬운 말로 세 개 카톡으로 보내줘\" — 키워드만 내 업종에 맞게 바꾸면 된다"],
-   pitfall:"긴 내용을 카톡에 그대로 보내면 읽기 어려워, <b>카톡은 요약 / 노션은 전체</b>로 나눠 저장했습니다. 보낼 곳의 성격에 맞춰 길이를 나누는 것이 요령입니다.",
-   need:["검색·메신저·기록 도구를 연결할 계정","내 업종 키워드 몇 개"],
-   hard:"핵심은 기술이 아니라 <b>「무엇을 세 개 고를지」의 기준</b>입니다. 기준이 흐리면 매일 오는 요약이 쓸모없어집니다.",
-   first:"오늘 아침에 무엇을 확인했는지, 그중 꼭 봐야 하는 것 세 개를 적어 보십시오.",
-   refs:[R.ytBrief]},
-  {k:"real", g:"🎓", h:"강의 대본과 발표자료 동시 생성", s:"강의 주제를 넣으면 대본과 편집 가능한 발표자료가 함께 나옵니다.", tool:"클로드코드",
-   pain:"강의 하나에 대본 쓰고 자료 만들고 자막 붙이는 일이 붙습니다. 회차가 많아지면 이 일이 본업을 잡아먹습니다.",
-   flow:["강의 주제·대상·시간·관점을 넣으면","기존 자료와 브랜드 색을 읽어 옴","대본 구성과 슬라이드 구성으로 바꿈","대본 + 편집 가능한 발표자료"],
-   steps:["바로 만들지 말고 <b>설계 대화 20분</b>을 먼저 한다",
-          "무엇을 반복하는지 스킬 한 장으로 정리한다",
-          "강의 주제·대상 수강생·강의 시간·설명 관점을 지정한다",
-          "대본과 슬라이드를 <b>같이</b> 요청한다",
-          "브랜드 색은 웹사이트 화면 캡처를 붙여 전달한다",
-          "레이아웃도 참고 화면 캡처로 전달한다"],
-   numbers:["실제 사례 — VOD <b>25분 × 16강</b> 납품용","1강 슬라이드 <b>6장</b>","대본 구성 — 도입부 → 핵심 개념 → 적용 → 실습 → 마무리","색은 웹사이트 캡처에서 추출(다크 네이비·웜 골드)"],
-   prompts:["\"자막, 파일정리, 그리고 매 수업에 필요한 스크립트 작성 및 발표자료 작성\"",
-            "\"이제 pptx를 만들어 줄 수 있어?\"",
-            "\"내가 쓰고 싶은 칼라는 이런 칼라야. (웹사이트 스크린샷 첨부)\"",
-            "\"표지만 원래 포맷으로 하고, 나머지는 흰색배경으로 변경해줘.\""],
-   pitfall:"첫 발표자료는 슬라이드가 <b>이미지로 변환돼 글자를 고칠 수 없었습니다.</b> 방식을 바꿔 해결했고, 저자 조언은 「편집 가능 여부를 먼저 확인해라」입니다. 어두운 배경은 이미지를 얹을 때 경계가 안 보여 불편했고, 이미지 자리를 비워두지 않아 공간은 손으로 확보했습니다. 도구가 알려주는 기능 정보가 최신이 아닐 수 있어 <b>내용 검수는 직접</b> 해야 합니다.",
-   need:["강의 주제와 대상·시간","브랜드 색이 보이는 화면 캡처","참고 레이아웃 캡처"],
-   hard:"자기 업무 중 시간이 많이 드는 지점을 <b>말로 설명하는 것</b>이 제일 어려웠다고 저자가 적었습니다. 그래서 20분 설계 대화가 효과가 있었습니다.",
-   first:"지난 강의 자료 하나와 우리 브랜드 색이 보이는 화면을 캡처해 두십시오.",
-   refs:[R.vod]},
-  {k:"idea", g:"📝", h:"출결과 상담 기록 정리", s:"수업 후 남긴 메모를 학생별로 모아 상담 때 바로 쓰는 형태로 정리합니다.", tool:"클로드코드",
-   pain:"메모는 쌓이는데 정작 상담 전날 밤에 처음부터 다시 읽습니다. 이탈 징후는 그 사이에 지나갑니다.",
-   flow:["수업이 끝난 뒤","그날 메모를 모음","학생별로 묶음","학생 카드를 갱신"],
-   need:["수업 메모를 적는 곳 하나"],
-   hard:"메모가 손글씨면 옮기는 단계가 하나 더 붙습니다.",
-   first:"이번 주 메모를 한 파일에 모아 보십시오.", refs:[]},
-  {k:"idea", g:"✉️", h:"학부모 안내문 초안", s:"공지할 내용 몇 줄을 넣으면 학부모용 안내문 문장으로 바꿔 줍니다.", tool:"코덱스",
-   pain:"내용 정하는 데 5분, 문장 다듬는 데 40분이 걸립니다.",
-   flow:["안내할 일이 생겼을 때","요점 몇 줄을 입력","안내문 톤으로 변환","보낼 형태로 출력"],
-   need:["지난 안내문 두세 장"],
-   hard:"학원마다 톤이 다릅니다. 예시가 곧 품질입니다.",
-   first:"작년에 보낸 안내문을 찾아 두십시오.", refs:[]}]},
-
- {t:"병원·의료", ico:"🩺", c:"var(--sky)", items:[
-  {k:"real", g:"📲", h:"예약 전날 문자 자동 발송", s:"예약 명단만 있으면 전날 정해진 시각에 안내 문자가 저절로 나갑니다. 만드는 과정이 영상에 그대로 나옵니다.", tool:"코덱스",
-   pain:"예약 문자를 손으로 보냅니다. 사람이 바쁘면 빠지고, 빠지면 그날 자리가 빕니다.",
-   flow:["매일 정한 시각","예약 시트를 읽어 옴","내일 예약자만 골라냄","문자 발송 후 시트에 발송 상태 기록"],
-   steps:["구글 시트에 예약 명단을 둔다 (기존 양식 그대로 써도 된다)",
-          "사이드바에서 <b>열을 짝지어 준다</b> — 고객명·전화번호·예약날짜·시간·내용",
-          "문자 보낼 시각을 정한다",
-          "문자 발송 서비스 키를 넣고 연결을 테스트한다",
-          "<b>수동 발송</b>으로 먼저 한 건 보내 확인한다",
-          "자동 발송을 켜고 예약 시각에 실제로 오는지 확인한다"],
-   numbers:["회사마다 시트 열이 다르므로 <b>열을 고르는 화면</b>을 먼저 만든 것이 핵심",
-            "발송 후 <b>발송 상태·발송 시간</b> 열에 기록 — 갔는지 안 갔는지 눈으로 확인된다",
-            "이미 <b>발송 완료</b>로 찍힌 사람에게는 다시 가지 않는다",
-            "예약 실행 시각은 <b>±10분 오차</b>가 있다 — 10시로 걸었더니 실제 발송은 10시 3분",
-            "문자 문구는 이름·날짜·시간·내용을 끼워 넣어 자유롭게 바꿀 수 있다"],
-   prompts:["\"구글 시트로 고객들의 예약일 전날 예약 문자를 보내려고 해. 기존에 가지고 있던 데이터가 어떤 형식이든 상관없이 사이드바에서 시트, 고객명, 전화번호, 날짜, 시간, 내용을 선택해서 설정을 하고 싶어.\"",
-            "\"1번 시트는 잘 연결이 되는데 나머지는 안 떠 선택할 수가 없어.\"",
-            "\"설정 저장 버튼이 먹통이야. 눌러도 반응도 없고 화면도 그대로야. 눌렀는지 확인할 수 있게 해 줘. 그리고 버튼이 작동하게 코드 수정해 줘.\"",
-            "\"자동 발송 설정했는데 시간이 지났는데 전송이 안 되었어. 뭐가 문제인지 알려줘.\"",
-            "예전에 만든 코드를 <b>통째로 같이 주고</b> 「이 부분을 참고해 줘」라고 했다 — 처음부터 짜지 않아 훨씐 빨랐다"],
-   pitfall:"<b>첫 코드는 그대로 돌지 않았습니다.</b> 시트가 하나만 선택되고, 저장 버튼이 먹통이고, 예약 시각이 지나도 발송이 안 됐습니다. 영상은 그때마다 <b>증상을 그대로 말해서</b> 코드를 세 번 고쳐 완성합니다 — 이 트랙에서 배울 게 바로 이 대화입니다.",
-   need:["예약 명단이 담긴 구글 시트","문자 발송 서비스 계정과 키 (가입은 몇 분)","발신 전화번호"],
-   hard:"환자 정보를 다루므로 밖으로 내보내지 않는 구조로 짜야 합니다. 그리고 <b>수동 발송으로 먼저 검증</b>한 뒤 자동으로 넘기는 순서가 안전합니다.",
-   first:"예약 명단을 시트 한 장으로 옮기고, 고객명·전화번호·예약날짜 세 열만 맞춰 두십시오.",
-   srcNote:"⚠️ 이 사례는 <b>구글 앱스 스크립트</b>로 구현됐습니다(우리 트랙 도구가 아닙니다). 같은 흐름을 클로드코드·코덱스로도 만들 수 있고, <b>고쳐 가며 완성하는 대화 방식</b>은 그대로 쓸 수 있습니다. 영상은 네일샵 예약 데이터로 시연합니다.",
-   refs:[R.ytSms, R.noshow]},
-  {k:"idea", g:"🗓️", h:"예약 리마인드 3번 보내기", s:"접수 즉시·확정 시·당일 오전, 세 시점의 명단과 안내 문구를 자동으로 만듭니다.", tool:"클로드코드",
-   pain:"예약 불이행은 대부분 잊어서 생깁니다. 그런데 접수 당일에 확인 문자 한 번 보내는 것으로는 며칠 뒤의 약속을 붙잡아 두지 못합니다.",
-   flow:["예약이 접수되면","예약 자료를 읽음","세 시점(접수·확정·당일 오전)을 계산","시점별 명단과 문구"],
-   numbers:["리마인드 시점은 <b>접수 즉시 · 예약 확정 · 당일 오전</b> 3회 — 노쇼율이 낮은 곳들의 공통점으로 꼽힌다",
-            "예약금을 걸면 부작용이 따르므로, <b>예약금 없이 다단계 알림</b>으로 푸는 쪽이 현실적이다"],
-   pitfall:"별도 관리 프로그램을 사거나 발송 솔루션을 계약하고 직원 교육까지 하려면 비용과 시간이 크게 듭니다. 그래서 <b>지금 쓰는 예약 자료 위에 얹는 방식</b>이 시작점으로 낫습니다.",
-   need:["예약 목록","보낼 통로 (문자·알림톡 등)"],
-   hard:"환자 정보는 밖으로 내보내지 않는 구조로 짜야 합니다. 이 조건이 설계의 출발점입니다. 그리고 한 번만 보내면 효과가 얕습니다 — 세 시점을 나누는 것이 핵심입니다.",
-   first:"예약을 어디에 적고 있는지부터 확인해 보십시오. 그 자료가 있으면 나머지는 날짜 계산입니다.",
-   srcNote:"이 카드는 <b>구조에 대한 분석 자료</b>에 기댄 응용 아이디어입니다. 같은 탭의 「예약 전날 문자 자동 발송」이 실제로 만든 사례이니 그쪽을 먼저 보십시오.",
-   refs:[R.noshow]}]},
-
- {t:"자영업·소매·서비스", ico:"🛒", c:"var(--lav)", items:[
-  {k:"real", g:"📊", h:"엉망인 엑셀을 정리하고 대시보드까지", s:"형식이 뒤죽박죽인 매출 파일을 정리하고, 사장님이 볼 대시보드 한 장까지 말로 만듭니다.", tool:"클로드",
-   pain:"날짜 형식이 제각각이고 같은 거래처가 여러 이름으로 적혀 있고 금액에 글자가 섞여 있어 합계조차 안 잡힙니다. 손으로 정리하면 반나절입니다.",
-   flow:["정리할 파일을 열어 두면","시트를 통째로 읽어 옴","형식 통일·중복 제거·표준 이름으로 정리","새 시트와 대시보드로"],
-   steps:["엑셀 리본의 <b>추가 기능</b>에서 클로드를 설치하고 로그인한다",
-          "정리를 시킬 때 <b>「원본은 그대로 두고 새 시트에」</b>를 함께 말한다",
-          "무엇을 분석할지 모르면 <b>질문부터 만들어 달라고</b> 한다",
-          "대시보드는 한 번에 시키지 말고 <b>짧은 명령으로 하나씩</b> 쌓는다",
-          "숫자가 맞는지 <b>어느 칸을 더한 건지</b> 되물어 확인한다",
-          "이번 작업 전체를 다음 달에 다시 쓸 수 있게 저장해 둔다"],
-   numbers:["실제 결과 — 113행이 중복 3건 빠지며 110행으로, 거래처 이름은 <b>8개 표준 이름</b>으로 통일",
-            "반나절 걸리던 정리가 <b>3분</b>",
-            "⚠️ <b>구독형 오피스가 필요하다</b> — 한 번 사서 쓰는 영구 라이선스 버전은 지원되지 않는다",
-            "회사 계정에서 막히면 개인 계정으로 로그인하거나 <b>무료 웹용 엑셀</b>을 쓰면 된다"],
-   prompts:["\"이 매출 시트를 정리해 줘. 원본은 그대로 두고 새 시트에. 바꾸기 전에 계획부터 보여 줘.\"",
-            "\"이 데이터로 뭘 분석해야 될지 모르겠어. 사장님이 궁금해할 질문 다섯 개를 네가 먼저 만들고 각각 답까지 해 줘.\"",
-            "\"이 실적은 어느 셀을 더한 거야?\" — 숫자를 검증하는 방법",
-            "\"오늘 한 작업 전체를 다음 달에 명령 하나로 똑같이 돌릴 수 있게 만들어 줘.\""],
-   pitfall:"<b>「계획부터 보여 줘」를 빼면</b> 멋대로 바꿔 버립니다. 이 한 마디가 결과를 가릅니다. 그리고 복잡한 대시보드를 한 번에 시키면 엉뚱한 걸 만듭니다 — 짧게 나눠 쌓아야 안정적입니다.",
-   need:["구독형 엑셀 또는 무료 웹용 엑셀","정리할 매출·거래 파일"],
-   hard:"AI가 준 숫자를 그냥 믿으면 안 됩니다. <b>어느 칸을 더했는지 되묻는 습관</b>이 있어야 「이 숫자 어디서 나온 거야?」라는 질문에 답할 수 있습니다.",
-   first:"가장 엉망인 파일 하나를 열고 「계획부터 보여 줘」를 붙여 정리를 시켜 보십시오.",
-   srcNote:"우리 트랙이 속한 <b>세인투 채널</b> 영상입니다. 이 사례는 <b>엑셀 안에 붙는 클로드 확장 기능</b>을 씁니다 — 우리 트랙 도구(클로드코드·코덱스)와는 다른 제품이지만, <b>시키는 방식</b>(계획부터 보여 달라 · 짧게 쌓기 · 반복은 저장해 두기)은 그대로 통합니다.",
-   refs:[R.ytExcel]},
-  {k:"real", g:"💇", h:"단골 관리와 안부 문자", s:"생일과 마지막 방문일을 보고 오늘 연락할 사람을 매일 아침 골라 줍니다.", tool:"코덱스",
-   pain:"결제 시스템과 예약은 갖춰져 있지만, 정작 「이 손님에게 언제 연락해야 하나」는 사람이 기억으로 챙깁니다. 기념일과 재방문 시기를 놓치면 손님은 조용히 다른 곳으로 갑니다.",
-   flow:["매일 아침 정한 시각","고객 명단을 읽어 옴","오늘 연락 대상만 골라냄","문구를 붙여 발송 목록으로"],
-   steps:["시트를 <b>대시보드 · 고객명단 · 메시지 템플릿 · 발송이력</b> 네 장으로 나눈다",
-          "고객명단에 이름·연락처·생일·최근 시술일·담당자를 적는다",
-          "지난 날짜를 자동으로 세도록 걸어 둔다",
-          "아침에 대시보드가 <b>오늘 생일</b>과 <b>재방문 안내 대상</b>을 뽑아 준다",
-          "발송 미리보기로 내용을 확인하고 보낸다",
-          "보낸 건은 발송이력으로 옮겨져 대시보드에서 사라진다"],
-   numbers:["시트 <b>4장</b> 구성 · 매일 아침 <b>6시</b> 갱신",
-            "보낸 건이 목록에서 <b>사라지는</b> 구조라 무엇이 남았는지 헷갈리지 않는다",
-            "문자 요금 기준 — 알림톡 9원 · 짧은 문자 13원 · 긴 문자 33원",
-            "이름·연락처로 검색하면 그 손님의 시술 이력과 메모, 보낸 문자까지 한 번에 보인다"],
-   pitfall:"외부 발송 서비스에 연결하려면 <b>스크립트 실행 권한을 승인</b>해야 하는데, 이때 「확인되지 않은 앱」 경고가 뜹니다. 놀라서 멈추는 사람이 많지만 정상 절차입니다.",
-   need:["고객 명단","문자 발송 서비스 계정과 발신번호 등록"],
-   hard:"핵심은 프로그램이 아니라 <b>「언제 연락할지」의 기준</b>입니다. 생일 며칠 전, 마지막 방문 몇 주 뒤 — 이 숫자를 정하는 게 실제 일입니다.",
-   first:"단골 스무 명만 이름·연락처·마지막 방문일 세 칸으로 적어 보십시오.",
-   srcNote:"제작자가 <b>무료 템플릿</b>을 공개한 영상입니다. 같은 영상에서 유료 맞춤 제작도 함께 안내하므로 감안하고 보십시오. 구조 자체는 그대로 따라 만들 수 있습니다.",
-   refs:[R.ytSalon]},
-  {k:"idea", g:"🧾", h:"매일 매출 정산 표", s:"영수증과 주문 내역을 모아 하루 정산 표를 자동으로 만듭니다.", tool:"코덱스",
-   pain:"문을 닫고 계산기를 두드립니다. 매일 30분이 그렇게 사라집니다.",
-   flow:["영업 종료 시","그날 자료를 모음","항목별 합계와 오차를 확인","일일 정산 표"],
-   need:["매출 자료가 남는 곳 (엑셀이든 앱 내역이든)"],
-   hard:"현금 거래가 섞이면 손으로 넣는 칸을 남겨 두어야 합니다.",
-   first:"어제 매출을 어디에서 확인했는지 그 경로를 적어 두십시오.", refs:[]},
-  {k:"idea", g:"📦", h:"거래처 발주 메일", s:"재고가 기준 아래로 떨어지면 발주 메일 초안을 만들어 둡니다.", tool:"클로드코드",
-   pain:"떨어진 것을 눈으로 보고 알아차립니다. 늦으면 손님을 그냥 돌려보냅니다.",
-   flow:["매주 정한 요일","재고 자료를 확인","기준에 못 미치는 품목을 추림","거래처별 메일 초안"],
-   need:["품목과 재고 기준 목록"],
-   hard:"기준 수량을 정하는 일이 사실 제일 어렵습니다. 자동화보다 이쪽이 오래 걸립니다.",
-   numbers:["현장 실태 — 어느 식당은 <b>공급사 26곳</b>에 매일 손으로 문자 발주를 했다",
-            "손 발주에서 실제로 생기는 일 — 숫자 오타로 과다 입고, 중간에 손님 받다가 <b>발주 누락</b>, 담당 직원 휴무일엔 서로 「발주했나요」 확인 전화",
-            "기존에 프로그램을 알아봤지만 <b>비싸고 원하는 대로 고쳐지지 않아</b> 포기했다"],
-   pitfall:"발주처를 줄이면 간단해지지만, 20년 거래한 곳들이라 줄일 수 없었습니다. <b>거래처 수를 줄이는 대신 발주하는 손을 줄이는 쪽</b>이 현실적인 답이었습니다.",
-   first:"자주 떨어지는 품목 다섯 개만 적어 보십시오.",
-   srcNote:"현장 실태는 관련 영상에서 확인된 사실입니다. 다만 그 영상의 프로그램은 <b>개발자가 대신 만들어 준 것</b>이라 직접 만든 사례로 올리지 않았습니다.",
-   refs:[R.ytOrder]}]},
-
- {t:"직장인 공통", ico:"💼", c:"var(--tang)", items:[
-  {k:"real", g:"🚀", h:"클로드코드 설치하고 첫 실행까지", s:"검은 화면을 열지 않고 설치하는 길입니다. 편집기에 확장 프로그램으로 붙입니다.", tool:"클로드코드",
-   pain:"자동화를 배우기도 전에 설치에서 막혀 멈춥니다. 이 트랙에서 사람이 가장 많이 이탈하는 지점이 여기입니다. 영상은 「어려운 설치도 없고 무서운 검은창도 없다」로 시작합니다.",
-   flow:["편집기를 설치하면","확장 프로그램으로 클로드를 붙임","작업 폴더를 열고 신뢰 허용","말로 시키면 파일이 만들어짐"],
-   steps:["VS Code를 내려받아 설치한다 — 설치 창은 「다음」만 누르면 된다",
-          "왼쪽 <b>확장 프로그램</b> 아이콘을 누르고 「클로드」를 검색해 설치한다",
-          "작업용 <b>빈 폴더</b>를 하나 만든다",
-          "파일 → 폴더 열기로 그 폴더를 연다",
-          "⚠️ 아이콘이 사라지면 확장 프로그램에서 <b>Enable</b>을 누른다 — 그 폴더를 믿어도 된다고 알려 주는 절차다",
-          "아이콘을 눌러 <b>/login</b> 을 치고 계정으로 로그인한다",
-          "<b>Shift+Tab</b> 으로 플랜 모드(파란색)로 바꾼다",
-          "첫 명령을 내려 결과 파일이 생기는지 확인한다"],
-   numbers:["<b>플랜 모드</b>는 실행 전에 계획을 보여 주고 승인을 받는다 — 초보에게 권장되는 이유",
-            "작업은 <b>내가 지정한 폴더 안에서만</b> 일어난다",
-            "코딩만 하는 게 아니다 — 정리·기획·문서·글쓰기도 같은 방식으로 시킨다"],
-   prompts:["\"안녕. 너의 자기 소개를 마크다운 파일로 만들어서 나에게 제공해 줘.\" — 영상의 첫 명령"],
-   pitfall:"폴더를 열면 클로드 아이콘이 사라집니다. 고장이 아니라 <b>새 폴더를 아직 신뢰하지 않아서</b>이고, 확장 프로그램에서 Enable을 누르면 돌아옵니다. 여기서 포기하는 사람이 많습니다.",
-   need:["VS Code","작업용 빈 폴더 하나","클로드 계정"],
-   hard:"영상의 조언이 이 트랙과 같습니다 — <b>완벽하게 시작하려 하면 시작하기도 전에 지칩니다.</b> 공식을 외우지 말고 만들면서 익히는 편이 빠릅니다.",
-   first:"빈 폴더를 하나 만들고 아이콘이 뜨는 것까지만 오늘 해 보십시오. 화면이 열리면 그날 몫은 끝입니다.",
-   refs:[R.ytInstall]},
-  {k:"real", g:"🧭", h:"코덱스 시작하고 자동화 걸기", s:"코덱스를 설치해 화면을 익히고, 매일 정해진 시각에 도는 자동화까지 만듭니다.", tool:"코덱스",
-   pain:"도구가 둘인데 한쪽만 익히면 막혔을 때 갈아탈 곳이 없습니다. 한도나 비용 때문에 대안을 찾게 되는 경우도 있습니다.",
-   flow:["자동화 탭에서 조건을 정하면","연결한 도구에서 자료를 가져옴","요청한 형식으로 정리","정한 시각에 지정한 곳으로 전달"],
-   steps:["코덱스를 내려받아 설치한다 (윈도우·맥 모두 있다)",
-          "입력창 아래에서 <b>모델</b>과 <b>인텔리전스</b>(생각의 깊이)를 고른다",
-          "<b>권한</b>을 정한다 — 매번 승인 / 알아서 하되 결과 보고 / 전부 위임 세 가지",
-          "<b>플러그인</b> 탭에서 쓰려는 도구를 연결한다 (캘린더·메신저·노션 등)",
-          "<b>자동화</b> 탭에서 「채팅으로 만들기」를 눌러 대화로 조건을 정한다",
-          "무엇을·언제·어디로 받을지 답하면 자동화가 등록된다"],
-   numbers:["인텔리전스 — 낮음은 파일 정리·분류 같은 단순 작업, 높음은 오래 걸리는 복잡한 작업",
-            "권한 3단계 — <b>매번 승인받기</b>가 초보에게 안전하다",
-            "플러그인 = 외부 도구 연결을 <b>클릭 한 번</b>으로 설치하는 묶음",
-            "영상 예시 — 캘린더에서 일정을 가져와 <b>매일 오전 9시</b> 메신저로 브리핑",
-            "목표 모드 — 목표 하나를 던지면 끝날 때까지 알아서 진행한다"],
-   pitfall:"자동화를 만들기 전에 <b>플러그인 연결을 먼저</b> 해야 합니다. 연결하지 않은 도구는 자동화에서 부를 수 없습니다.",
-   need:["코덱스 설치","연결할 도구 계정 (캘린더·메신저 등)"],
-   hard:"「코딩」이라는 단어에 겁먹지 않는 것이 시작입니다. 영상의 정리는 <b>「AI가 내 컴퓨터에서 일을 한다」</b> 한 줄입니다.",
-   first:"코덱스를 설치하고 화면만 열어 보십시오. 자동화 탭이 어디 있는지 찾는 것까지가 오늘 몫입니다.",
-   refs:[R.ytCodex]},
-  {k:"real", g:"🎯", h:"무엇을 자동화할지 고르는 법", s:"첫 대상을 잘못 고르면 며칠 만들고 안 쓰게 됩니다. 실무자 4명이 실제로 쓴 기준입니다.", tool:"클로드코드",
-   pain:"시작할 때 가장 어려운 건 도구 사용법이 아니라 <b>무엇을 자동화할지 고르는 일</b>입니다. 대상을 잘못 고르면 며칠 만들고 안 쓰게 됩니다.",
-   flow:["이번 주에 2회 이상 한 일을 적는다","캘린더·메일함에서 근거를 모은다","남의 손이 필요 없는 것만 남긴다","결과가 파일이나 표로 나오는 것을 고른다"],
-   numbers:["좋은 대상 ① 「매일 또는 매주 반복된다」",
-            "좋은 대상 ② 「지금 손으로 하고 있다」",
-            "좋은 대상 ③ 「범위가 한 사람 안에서 닫힌다」",
-            "좋은 대상 ④ 「결과가 눈에 보인다」",
-            "다섯 번째 관점 — 결과를 볼 곳이 <b>이미 매일 여는 곳</b>인가. 아니면 「2주쯤 뒤에 잊힙니다」",
-            "피할 것 — 「제일 힘든 일을 고르면 대개 실패합니다」 · 승인이나 타 팀 협조가 필요한 일 · 완성 판정이 안 되는 「판단을 돕는다」류"],
-   prompts:["\"무엇이 생기면 나는 항상 무엇을 한다.\" — 대상을 찾아내는 문장 틀"],
-   pitfall:"방치되는 주된 이유는 성능이 아니라 <b>위치</b>였습니다 — 결과를 확인하러 가야 하는 곳이 원래 일하던 자리와 다르면 열지 않게 됩니다. 사내 챗봇 사례에서는 쓰기 시작한 뒤에야 문제가 드러났습니다: 과거 답변이 한 시간 동안 반복되고, 표현이 조금 달라지면 실패하고, 모바일에서 PDF 미리보기가 안 되고, 「인사평가」 질문에 「리조트」를 안내했습니다. 저자는 이것들이 「하나도 만들 때는 안 보이던 문제」라고 적었습니다. AI가 「수정 완료했습니다」라고 해도 <b>직접 테스트</b>해야 합니다.",
-   need:["이번 주 캘린더와 메일함","자기 업무를 말로 설명할 수 있는 것 — 글이 유일하게 든 전제 조건"],
-   hard:"제일 힘든 일부터 고르려는 마음을 누르는 것이 어렵습니다. 반복되지만 <b>단순한 일</b>부터 끝내는 편이 완성 확률이 높습니다.",
-   first:"이번 주에 두 번 이상 한 일을 세 개만 적어 보십시오. 그중 남의 손이 필요 없는 것이 첫 후보입니다.",
-   refs:[R.picks]},
-  {k:"real", g:"🗣️", h:"내 반복 업무를 AI가 인터뷰해서 정리", s:"무엇을 만들지 모를 때, AI가 한 번에 한 가지씩 물어 내 업무를 문서 한 장으로 만들어 줍니다.", tool:"클로드코드",
-   pain:"저자의 표현은 「단순한데 실수가 나는 작업, 반복되는데 매번 신경 써야 하는 작업」이었습니다. 머릿속에만 있으면 남에게 넘기지도, 자동화하지도 못합니다.",
-   flow:["「인터뷰부터 하자」고 요청하면","내 설명과 기존 기록을 읽어 옴","한 번에 한 가지씩 물어 빠진 것만 채움","워크시트 한 장으로 정리"],
-   steps:["「인터뷰 → 워크시트」 순서만 쓰라고 지정한다",
-          "질문을 <b>한 번에 1개씩만</b> 하라고 요청한다",
-          "첫 질문은 「업무를 한 문장으로 설명해 달라」였다",
-          "미리 적어 둔 기록 파일을 첨부한다 → 이미 아는 건 표로 확인해 주고 <b>빠진 것만</b> 묻는다",
-          "인터뷰가 끝나면 워크시트 한 장이 나온다"],
-   numbers:["결과물 — <b>워크시트 1장</b>: 업무 목적 · 시작 조건 · 처리 7단계 · 예외 3건 · 검토 포인트 4개 · 보류 3건",
-            "달라진 것 — 머릿속에만 있던 업무가 문서 한 장이 되고, 「무엇을 만들지 모름」이 「처리 단계·입출력·예외 명세」로 바뀌었다"],
-   prompts:["\"지금 업무를 1주차 인터뷰/워크시트 흐름으로 진행해줘.\"",
-            "\"인터뷰 → 워크시트 순서만 사용하고, 현재 업무 설명과 입력/출력/예외/검토 포인트까지만 정리해줘.\"",
-            "\"인터뷰 질문은 한 번에 1개씩만 해줘.\"",
-            "\"미리 정리해둔 기록이 있어. 이걸 참조해서 부족한 것만 질문해줘.\""],
-   pitfall:"여러 질문을 동시에 받으면 무엇을 먼저 답할지 몰라 흐름이 끊깁니다. 업무 정의가 안 된 상태에서 <b>도구부터 고르면 방향을 잃습니다.</b> 「그냥 자동화해줘」라고만 하면 안 됩니다 — AI는 내 업무를 모르므로 설명이 필요합니다.",
-   need:["클로드코드","기존에 적어 둔 업무 메모 (있으면 훨씐 빨라진다)"],
-   hard:"자기 업무를 말로 설명하는 일 자체가 어렵습니다. 그래서 질문을 <b>한 개씩</b> 받는 것이 요령입니다.",
-   first:"「내 업무를 한 문장으로 설명하면?」 이 질문에 먼저 답해 보십시오.",
-   srcNote:"이 글은 <b>업무 정리까지</b>입니다. 저자도 「자동화가 된 건 아직 아니다」라고 밝혔습니다. 그래도 이 트랙에서 가장 먼저 할 일이 이것입니다.",
-   refs:[R.interview]},
-  {k:"own", g:"🌅", h:"아침 8시 브리핑", s:"메일과 뉴스, 일정을 하나로 묶어 출근 전에 요약을 받습니다. 제가 매일 받고 있는 것입니다.", tool:"클로드코드",
-   pain:"아침 30분을 확인하는 데 씁니다. 정작 중요한 건 오후에 발견합니다.",
-   flow:["아침 8시","메일·뉴스·일정을 모음","중요한 것만 고름","요약 한 장을 보냄"],
-   need:["업무 메일 계정","평소 보는 뉴스 몇 곳"],
-   hard:"「중요한 것」의 기준을 내 언어로 적는 단계가 핵심입니다. 여기를 건너뛰면 요약이 쓸모없어집니다.",
-   first:"오늘 아침에 확인한 것을 순서대로 적어 보십시오. 그게 곧 설계도입니다.", refs:[]},
-  {k:"own", g:"🎙️", h:"회의록 정리", s:"녹취 결과를 결정·할 일·보류로 나눠 정리합니다. W1에서 보여 드린 그 사례입니다.", tool:"코덱스",
-   pain:"회의는 끝났는데 정리가 남습니다. 미루면 기억이 먼저 사라집니다.",
-   flow:["회의가 끝난 뒤","녹취 글을 읽음","결정·할 일·보류로 분류","회의록과 할 일 목록"],
-   need:["녹취 도구 하나"],
-   hard:"사람 이름과 말투가 섞여 나옵니다. 정리 기준을 먼저 정해 두어야 합니다.",
-   first:"최근 회의록 하나를 열어 결정과 할 일에 표시만 해 보십시오.", refs:[]},
-  {k:"own", g:"📊", h:"주간보고서 초안", s:"한 주 동안의 기록을 모아 보고서 초안을 만듭니다.", tool:"클로드코드",
-   pain:"한 주 동안 무엇을 했는지 금요일에 기억해 냅니다.",
-   flow:["금요일","한 주 기록을 모음","항목별로 묶음","보고서 초안"],
-   need:["하루 한 줄이라도 남기는 기록"],
-   hard:"기록이 없으면 자동화할 재료가 없습니다. 여기가 진짜 관문입니다.",
-   first:"오늘부터 하루 한 줄만 남겨 보십시오.", refs:[]}]},
-
- {t:"은퇴·1인기업", ico:"🌱", c:"var(--leaf)", items:[
-  {k:"real", g:"🗂️", h:"흩어진 자료 6,460개를 검색되게", s:"폴더 속 폴더에 묻힌 파일을 중요도에 따라 세 층으로 나눠 검색되는 아카이브로 만들었습니다.", tool:"클로드코드",
-   pain:"이전 직장에서 그대로 들고 나온 폴더가 폴더 속 폴더로 중첩돼 어디에 무엇이 있는지 알 수 없었습니다. 파일명은 「최종.hwp」「최종2.hwp」「진짜최종.hwp」로 뒤섞여 열어보기 전엔 내용을 알 수 없었습니다.",
-   flow:["폴더를 그대로 보여주고 물어보면","전체 폴더와 파일을 읽어 옴","중요도에 따라 세 층으로 나눔","변환·목록·인덱스로 정리"],
-   steps:["폴더를 그대로 보여주고 「어떻게 정리하면 좋을지」 묻는다",
-          "세 층 구조 제안을 받는다",
-          "폴더 번호 체계를 다시 잡는다",
-          "처리가 애매한 파일은 임시폴더로 빼둔다",
-          "스크립트로 폴더명을 일괄 변경하고 파일을 재배치한다",
-          "목록 노트와 전체 인덱스를 만든다",
-          "실제 검색으로 테스트한다"],
-   numbers:["대상 <b>6,460개</b> (HWP·PPT·XLSX)",
-            "<b>1층</b> — 핵심 문서만 마크다운으로 변환",
-            "<b>2층</b> — 나머지는 제목·경로·유형만 노트로 남기고 원본은 그대로",
-            "<b>3층</b> — 전체 폴더 구조를 한눈에 보는 인덱스 1장",
-            "검증 — 실제 사건명으로 검색해 제대로 찾아지는지 확인"],
-   prompts:["\"폴더를 한번 보고 어떻게 폴더를 정리하면 좋을지. 중요한 파일은 md파일로 변환시키고, 그것보다 중요성이 떨어진 파일은 메타데이터로 남겨놓고,\"",
-            "\"저렇게 처리하기 애매한 파일은 임시폴더라고 제일 상위 카테고리로 해서 집어넣어줘.\"",
-            "\"파일 서치하는 과정에서 이게 맞게 생성된건지 테스트를 해보자.\""],
-   pitfall:"<b>전부 변환하려 들면 엄두가 안 납니다.</b> 6,000개를 다 바꾸려던 생각을 접고 중요도별로 층을 나눈 덕에 작업량이 감당 가능해졌습니다. 규칙을 여러 번 고치다 이전 상태로 되돌리고 싶어져서 10분마다 자동 저장·백업을 걸었습니다.",
-   need:["정리할 폴더","결과를 둘 곳","되돌릴 수 있는 백업"],
-   hard:"정리 기준을 혼자 고민하지 말고 <b>폴더를 먼저 보여주고 물어보는 것</b>이 요령입니다. 기준부터 세우려 하면 시작을 못 합니다.",
-   first:"가장 어질러진 폴더 하나를 골라 「이 폴더 어떻게 정리하면 좋을지」부터 물어보십시오.",
-   refs:[R.vault]},
-  {k:"idea", g:"🎬", h:"영상 자막과 요약", s:"올릴 영상의 자막을 뽑고 설명글 초안까지 만듭니다.", tool:"코덱스",
-   pain:"편집은 되는데 자막과 설명글에서 매번 지칩니다.",
-   flow:["영상이 준비되면","음성을 글로 옮김","문장을 다듬고 요약","자막 파일과 설명글"],
-   need:["영상 파일"],
-   hard:"고유명사는 틀리게 나옵니다. 자주 쓰는 단어 목록을 만들어 두면 크게 줄어듭니다.",
-   first:"지난 영상 하나로 먼저 시험해 보십시오.", refs:[R.ytsum]}]}
-];
-
-/* 대표 이미지는 「출처」로 확정된 자료만 쓴다 — 관련 영상·관련 글 썸네일을
-   카드 대표 이미지로 쓰면 카드 내용과 어긋나 보인다 (Owner 결정 2026-09-09) */
-function pickCover(it){
-  if (!it.refs) return null;
-  for (var i = 0; i < it.refs.length; i++) if (it.refs[i].role.indexOf('출처') === 0 && it.refs[i].th) return it.refs[i];
-  return null;
-}
-
-var tabsEl = document.getElementById('tabs');
-var grid = document.getElementById('grid');
-var dlg = document.getElementById('dlg');
-
-DATA.forEach(function(g, i){
-  var b = document.createElement('button');
-  b.className = 'tab';
-  b.style.setProperty('--c', g.c);
-  b.setAttribute('role','tab');
-  b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-  b.innerHTML = '<span class="ico">' + g.ico + '</span>' + g.t +
-                '<span class="n">' + String(g.items.length).padStart(2,'0') + '</span>';
-  b.onclick = function(){ select(i); };
-  tabsEl.appendChild(b);
-});
-
-function select(i){
-  Array.prototype.forEach.call(tabsEl.children, function(b, j){
-    b.setAttribute('aria-selected', i === j ? 'true' : 'false');
-  });
-  var g = DATA[i];
-  document.getElementById('listTitle').textContent = g.ico + ' ' + g.t;
-  document.getElementById('listCount').textContent = String(g.items.length).padStart(2,'0') + ' CASES';
-  grid.innerHTML = '';
-  g.items.forEach(function(it, k){
-    var kd = KIND[it.k];
-    var ref = pickCover(it);
-    var c = document.createElement('button');
-    c.className = 'card';
-    c.style.setProperty('--c', g.c);
-    c.style.animationDelay = (k * 80) + 'ms';
-    var thumbInner = '<span class="glyph">' + it.g + '</span>';
-    if (ref) {
-      thumbInner += '<img src="' + ref.th + '" alt="" loading="lazy" referrerpolicy="no-referrer" ' +
-        'onerror="this.remove()">' +
-        '<span class="src">' + ref.role + ' · <b>' + ref.p + '</b>' +
-        (ref.d ? '<i class="dt">' + ref.d + '</i>' : '') + '</span>';
-    }
-    c.innerHTML =
-      '<div class="thumb"><span class="kind ' + kd[1] + '">' + kd[0] + '</span>' +
-        '<span class="tool" title="' + it.tool + '">' + TOOL[it.tool] + '</span>' + thumbInner + '</div>' +
-      '<div class="cbody"><h3>' + it.h + '</h3>' +
-      '<div class="sum">' + it.s + '</div>' +
-      '<div class="chips"><span class="chip w tool-chip">' + TOOL[it.tool] + it.tool + '</span>' +
-      (it.refs.length ? '<span class="chip w">🔗 자료 ' + it.refs.length + '</span>' : '') +
-      (hasStale(it) ? '<span class="chip stale">⏳ 오래된 자료</span>' : '') +
-      '</div><div class="go">자세히 보기 &rarr;</div></div>';
-    c.onclick = function(){ openCase(g, it); };
-    grid.appendChild(c);
-  });
-}
-
-function openCase(g, it){
-  var kd = KIND[it.k];
-  var ref = pickCover(it);
-  document.getElementById('dHero').style.setProperty('--c', g.c);
-  document.getElementById('dGlyph').textContent = it.g;
-  var img = document.getElementById('dImg');
-  if (ref) { img.hidden = false; img.src = ref.th; img.onerror = function(){ img.hidden = true; }; }
-  else { img.hidden = true; img.removeAttribute('src'); }
-
-  document.getElementById('dMeta').innerHTML =
-    '<span class="chip w">' + kd[0] + '</span>' +
-    '<span class="chip">' + g.ico + ' ' + g.t + '</span>' +
-    '';
-  document.getElementById('dTitle').textContent = it.h;
-
-  var refsHtml = it.refs.map(function(r){
-    return '<a href="' + r.u + '" target="_blank" rel="noopener noreferrer">' +
-      '<img class="tn" src="' + r.th + '" alt="" referrerpolicy="no-referrer" onerror="this.remove()">' +
-      '<span class="tx">' + r.t + '<span>' + r.p +
-        (r.d ? ' · ' + r.d + (isStale(r.d) ? ' ⏳' : '') : '') + '</span></span>' +
-      '<span class="role">' + r.role + '</span></a>';
-  }).join('');
-  refsHtml += '<a href="' + DOC[it.tool] + '" target="_blank" rel="noopener noreferrer">' +
-      '<span class="tx">' + it.tool + ' 공식 문서<span>' + DOC[it.tool].replace('https://','') + '</span></span>' +
-      '<span class="role">문서</span></a>';
-
-  document.getElementById('dBody').innerHTML =
-    '<div class="sec"><h4>개요</h4><p class="lead">' + it.s + '</p></div>' +
-
-    '<div class="sec"><h4>목적</h4><p>' + it.pain + '</p></div>' +
-
-    '<div class="sec"><h4>자동화 내용</h4>' +
-      '<p class="hint">아래 네 칸은 어떤 자동화든 같습니다. 시작만 다르고 뒤는 같습니다.</p>' +
-      '<div class="flow">' +
-      it.flow.map(function(v, i){ return '<div><b>' + F[i] + '</b><span>' + v + '</span></div>'; }).join('') +
-    '</div></div>' +
-
-    (it.steps ? '<div class="sec"><h4>출처에서 확인된 순서</h4><ol class="steps">' +
-      it.steps.map(function(v){ return '<li>' + v + '</li>'; }).join('') + '</ol></div>' : '') +
-
-    (it.numbers ? '<div class="sec"><h4>확인된 기준·수치</h4><ul class="nums">' +
-      it.numbers.map(function(v){ return '<li>' + v + '</li>'; }).join('') + '</ul></div>' : '') +
-
-    (it.prompts ? '<div class="sec"><h4>실제로 쓰인 말</h4>' +
-      '<p class="hint">출처에 원문으로 실린 문장입니다. 그대로 따라 쓰셔도 됩니다.</p>' +
-      it.prompts.map(function(v){ return '<blockquote class="q">' + v + '</blockquote>'; }).join('') + '</div>' : '') +
-
-    (it.pitfall ? '<div class="sec"><h4>출처가 겪은 실패</h4><p class="note warn">' + it.pitfall + '</p></div>' : '') +
-
-    '<div class="sec"><h4>사용 도구</h4><div class="links">' +
-      '<a href="' + DOC[it.tool] + '" target="_blank" rel="noopener noreferrer">' +
-        '<span class="tn plain">' + TOOL[it.tool] + '</span>' +
-        '<span class="tx">' + it.tool + '<span>공식 문서 보기 · ' + DOC[it.tool].replace('https://','') + '</span></span>' +
-      '</a></div></div>' +
-
-    '<div class="sec"><h4>필요한 것</h4><ul>' +
-      it.need.map(function(n){ return '<li>' + n + '</li>'; }).join('') +
-    '</ul></div>' +
-
-    '<div class="sec"><h4>어려운 지점</h4><p class="note">' + it.hard + '</p></div>' +
-
-    '<div class="sec"><h4>첫 걸음</h4><p class="note first">' + it.first + '</p></div>' +
-
-    '<div class="sec"><h4>출처</h4>' +
-      (hasStale(it) ? '<p class="note warn">⏳ <b>발행된 지 6개월이 넘은 자료입니다.</b> 도구가 빠르게 바뀌어서 화면과 순서가 지금과 다를 수 있습니다. 흐름과 판단 기준만 참고하시고, 세부 절차는 최신 문서를 확인하십시오.</p>' : '') +
-      (it.srcNote ? '<p class="note warn srcnote">' + it.srcNote + '</p>' : '') +
-      (it.refs.length
-        ? '<div class="links">' + it.refs.map(function(r){
-            return '<a href="' + r.u + '" target="_blank" rel="noopener noreferrer">' +
-              '<img class="tn" src="' + r.th + '" alt="" referrerpolicy="no-referrer" onerror="this.remove()">' +
-              '<span class="tx">' + r.t + '<span>' + r.p + '</span></span>' +
-              '<span class="role">' + r.role + '</span></a>';
-          }).join('') + '</div>'
-        : (it.k === 'own' ? '<p class="note">낙관이 실제로 돌리고 있는 자동화입니다. 외부 출처가 아니라 본인 사례이고, 궁금한 점은 줌에서 물어보시면 화면으로 보여 드립니다.</p>' : '<p class="note warn">검증된 공개 사례를 찾지 못했습니다. 낙관이 제안하는 <b>응용 아이디어</b>이고, 위 내용은 실측이 아닙니다. 직접 만들어 보신 뒤 사례로 올려 주시면 이 카드가 실사례로 바뀝니다.</p>')) +
-    '</div>';
-
-  dlg.showModal();
-}
-
-/* 낙관이 고른 시청 목록 — 사례집이 아니라 참고 목록이라 상세를 만들지 않고 원본으로 바로 보낸다 */
-var WATCH = [
- {g:"🎁 가져다 쓰는 것", items:[
-  {id:"9hAcDsqHlR4", t:"네이버 블로그 자동화, 돈 내고 쓰지 마세요 — Codex 프로그램 소스 무료 공개", ch:"복사장", d:"2026-08-23", dur:"45분",
-   why:"완성된 프로그램을 통째로 공개했습니다. 따로 결제하는 방식이 아니라 코덱스 구독량으로 돌아가고, 「고쳐 쓰면서 연습하라」는 게 만든 사람의 뜻입니다."},
-  {id:"a-oG2FJwTz0", t:"보조금24 데이터로 내 혜택만 걸러주는 웹앱 만들어봅시다", ch:"방구석컴퍼니", d:"2026-09-02", dur:"15분",
-   why:"공공 데이터를 받아 화면으로 만들고 인터넷에 올리기까지가 한 벌로 들어 있습니다. 결과가 엉뚱하게 나오던 함정 세 개를 찾아 고치는 장면이 특히 볼 만합니다."}]},
- {g:"🔧 만드는 법", items:[
-  {id:"v2C9qRgTzT0", t:"하루 30분, AI로 인스타그램 운영한 방법", ch:"온크트리", d:"2026-08-17", dur:"7분",
-   why:"기획은 코덱스에, 손은 클로드에 맡기는 분업이 핵심입니다. 사람이 쓰는 디자인 도구를 그대로 조작하게 해서 「AI 티」를 없앴습니다."},
-  {id:"bB2PyjK7QZE", t:"클로드로 쇼핑 쇼츠 자동화 — 제품 링크 하나로 AI 쇼츠 완성", ch:"홍아린 AI", d:"2026-08-25", dur:"16분", note:"협찬 고지 있음",
-   why:"컷마다 얼굴과 제품이 바뀌는 문제를, 인물과 제품을 먼저 고정해 두고 푸는 방법입니다."},
-  {id:"OPFMs1-WoKE", t:"클로드 영상 자동화 3탄 — 모션그래픽", ch:"데키랩", d:"2026-07-29", dur:"12분",
-   why:"전문 편집 도구 없이 말로만 모션그래픽을 만듭니다. 여러 개를 만들 땐 한꺼번에 나눠 시키라는 팁이 있습니다."},
-  {id:"sozxBiyc3qQ", t:"평생 써먹는 바이브코딩 자동화 대시보드 — 설계부터 구축까지", ch:"양실장의 바이브코딩대학", d:"2026-08-20", dur:"2시간 35분", long:true,
-   why:"긴 강의입니다. 「대시보드는 데모까지는 빨리 나오고 그 뒤부터 어려워진다」는 지적이 이 영상의 값입니다. 시간을 비우고 보십시오."}]},
- {g:"🧭 보는 눈", items:[
-  {id:"QrQRIg5EqPc", t:"AI로 만든 PPT, 그대로 쓰면 티 납니다 — 이 기준으로 수정하세요", ch:"헤이디_일잘러의 업무스킬", d:"2026-07-31", dur:"14분",
-   why:"고치는 기준 두 가지를 줍니다 — 강조할 곳이 강조됐는가, 데이터가 한눈에 들어오는가. 만드는 법이 아니라 판단하는 법이라 오래 씁니다."}]}
-];
-
-(function renderWatch(){
-  var box = document.getElementById('watch');
-  WATCH.forEach(function(g){
-    var wrap = document.createElement('div');
-    wrap.className = 'wgroup';
-    wrap.innerHTML = '<h3>' + g.g + '</h3><div class="wlist">' +
-      g.items.map(function(v){
-        return '<a class="wcard" href="https://www.youtube.com/watch?v=' + v.id + '" target="_blank" rel="noopener noreferrer">' +
-          '<div class="wthumb"><img src="https://img.youtube.com/vi/' + v.id + '/hqdefault.jpg" alt="" loading="lazy" ' +
-            'referrerpolicy="no-referrer" onerror="this.remove()">' +
-            '<span class="wdur' + (v.long ? ' long' : '') + '">' + v.dur + '</span></div>' +
-          '<div class="wbody"><h4>' + v.t + '</h4>' +
-            '<div class="wmeta">' + v.ch + ' · ' + v.d + (isStale(v.d) ? ' ⏳' : '') + '</div>' +
-            (v.note ? '<span class="wnote">⚠️ ' + v.note + '</span>' : '') +
-            '<div class="wwhy">' + v.why + '</div></div></a>';
-      }).join('') + '</div>';
-    box.appendChild(wrap);
-  });
-})();
-
-document.getElementById('dlgClose').onclick = function(){ dlg.close(); };
-dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
-select(0);
-</script>
+</main>
 </body>
 </html>
